@@ -18,7 +18,8 @@
       <h1>Search products</h1>
     </header>
     <main>
-      <form action="http://localhost:8080/pierwszy_war_exploded/parameters" method="get">
+      <form name="ShalomServlet" method="post" action="parameters" >
+        <%-- zamienienie metody na post zamiast get, i w action zamienienie całego url --%>
       <fieldset class="segment1">
         <legend>Product I:</legend>
           <div class="inputField">
