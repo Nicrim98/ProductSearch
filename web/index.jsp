@@ -9,13 +9,17 @@
 <html>
   <head>
     <title>Form</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
   <div class="container">
-    <div class="title">
+    <header>
+      <h1>Search products</h1>
+    </header>
+    <main>
       <form action="http://localhost:8080/pierwszy_war_exploded/parameters" method="get">
-      <fieldset>
+      <fieldset class="segment1">
         <legend>Product I:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
@@ -43,7 +47,7 @@
           </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="segment2">
         <legend>Product II:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
@@ -71,7 +75,7 @@
           </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset class = "segment3">
         <legend>Product III:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
@@ -99,7 +103,7 @@
           </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset class = "segment4">
         <legend>Product IV:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
@@ -127,7 +131,7 @@
           </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset class = segment5>
         <legend>Product V:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
@@ -155,15 +159,18 @@
           </div>
       </fieldset>
 
-      <fieldset>
+      <div class="segment6">
         <div class="button">
+          <br>
           <input id="submitBtn" type="submit" value="Search"></input>
-          <input type="reset" value="clear">
+          <br><br><br>
+          <input id="clear" type="reset" value="Clear">
         </div>
-      </fieldset>
-  </form>
-  </div>
+      </div>
+      </form>
+    </main>
   </div>
   </body>
 </html>
+
 

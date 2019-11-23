@@ -18,13 +18,6 @@ public class ShalomServlet extends HttpServlet {
     public static String maxPrice;
     public static String reputation;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    public String getProductName() {
-        return productName;
-    }
-
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)    throws ServletException, IOException {
         PrintWriter out = response.getWriter();
@@ -34,6 +27,10 @@ public class ShalomServlet extends HttpServlet {
         minPrice = request.getParameter("minPrice");
         maxPrice = request.getParameter("maxPrice");
         reputation = request.getParameter("reputation");
+
+        Product p = new Product(productName, Integer.parseInt(amount), Float.parseFloat(minPrice), Float.parseFloat(maxPrice), Float.parseFloat(reputation));
+        Controller c = new Controller();
+        c.Search(p);
 
         out.println("Received Data");
         out.println(productName);
@@ -45,7 +42,19 @@ public class ShalomServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)	throws ServletException, IOException {
+
         PrintWriter out = response.getWriter();
+
+        productName= request.getParameter("productName");
+        amount = request.getParameter("amount");
+        minPrice = request.getParameter("minPrice");
+        maxPrice = request.getParameter("maxPrice");
+        reputation = request.getParameter("reputation");
+
+        Product p = new Product(productName, Integer.parseInt(amount), Float.parseFloat(minPrice), Float.parseFloat(maxPrice), Float.parseFloat(reputation));
+        Controller c = new Controller();
+        c.Search(p);
+
 
         out.println("Submitted Data");
         out.println("Product Name:"+ request.getParameter("productName"));
@@ -54,17 +63,7 @@ public class ShalomServlet extends HttpServlet {
         out.println("MaxPrice:"+request.getParameter("maxPrice"));
         out.println("Reputation:"+request.getParameter("reputation"));
 
-        String name = request.getParameter("productName");
-        String amo = request.getParameter("amount");
-        String min = request.getParameter("minPrice");
-        String max = request.getParameter("maxPrice");
-        String repu = request.getParameter("reputation");
 
-        setProductName(name);
-//        setAmount(amo);
-//        setMinPrice(min);
-//        setMaxPrice(max);
-//        setReputation(repu);
     }
 
 }
