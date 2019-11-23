@@ -50,7 +50,7 @@ public class FoundProduct{
         else if(firstProduct.getFoundProductTotalPrice() < secondProduct.getFoundProductTotalPrice()){
             return secondProduct;
         }
-        else(firstProduct.getFoundProductTotalPrice() == secondProduct.getFoundProductTotalPrice()){
+        else{
             if(firstProduct.getFoundReputation() >= secondProduct.getFoundReputation()){
                 return firstProduct;
             }
