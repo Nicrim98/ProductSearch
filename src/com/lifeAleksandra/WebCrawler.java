@@ -16,11 +16,11 @@ public class WebCrawler{
         //spr ceny zanim wejdzie w link do "comparePriceLink"
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/"+product.name+"/price"); //pobranie zrodla strony
         Elements webSites; //strony 1.2...3
-        Elements oneLink; //brak opcji porownaj ceny
+        //Elements oneLink; //brak opcji porownaj ceny
         do {
             Document document = connect.get();
             webSites = document.select("a.pager-btn.arrow.right"); //strong.price.gtm_sor_price //strony z wynikami wyszukiwania 1,2,3...
-            oneLink = document.select("a.more-info");
+            //oneLink = document.select("a.more-info");
             System.out.println(webSites.size());
             // To działa
 //            for (Element element : oneLink) {
@@ -37,8 +37,12 @@ public class WebCrawler{
                 for (Element box1 : box) {
                     Float priceInBox = Float.parseFloat(box1.select("strong.price.gtm_sor_price").text().replace("od ", "").replace(" ", "").replace("zł", "").replace(",", "."));
                     if (priceInBox > product.min_price && priceInBox < product.max_price) {
-
-                        Elements comperePriceLink = box1.select("a.compare-link-1"); //strona porownaj cene- kilka ofert na Skapiec.pl
+                        Elements comperePriceLink = box1.select("a.compare-link-1");//strona porownaj cene- kilka ofert na Skapiec.pl
+                        System.out.println(comperePriceLink.text());
+                        if(comperePriceLink.text().isEmpty()){
+                            comperePriceLink = box1.select("a.more-info");
+                            System.out.println("ygfu"+ comperePriceLink.text());
+                        }
                         System.out.println(priceInBox);
                         connect = Jsoup.connect("https://www.skapiec.pl" + comperePriceLink.attr("href"));
                         //System.out.println("https://www.skapiec.pl" + comperePriceLink1.attr("href"));
@@ -88,7 +92,7 @@ public class WebCrawler{
 
 
     public static void main(String[] args) {
-        Product p = new Product("mysz logitech ", 1, 80, 200, 4);
+        Product p = new Product("mysz logitech g502", 1, 250, 400, 4);
         WebCrawler w = new WebCrawler();
         try {
             w.Search(p);
