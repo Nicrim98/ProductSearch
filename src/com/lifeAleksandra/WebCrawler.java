@@ -92,6 +92,10 @@ public class WebCrawler{
     }
 
 
+//    public void (Product a, Product b){
+//
+//    }
+
     public static void main(String[] args) {
         Product p = new Product("mysz logitech g502", 1, 280, 400, 4);
         WebCrawler w = new WebCrawler();
