@@ -39,7 +39,7 @@
         <legend>Product I:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" required></input>
+            <input name="productName" type="text" value="" required></input>
           </div>
 
           <div class="inputField">
@@ -68,7 +68,7 @@
         <legend>Product II:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text"></input>
+            <input name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
@@ -96,7 +96,7 @@
         <legend>Product III:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" ></input>
+            <input name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
@@ -124,7 +124,7 @@
         <legend>Product IV:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" ></input>
+            <input name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
@@ -152,7 +152,7 @@
         <legend>Product V:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" ></input>
+            <input name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
