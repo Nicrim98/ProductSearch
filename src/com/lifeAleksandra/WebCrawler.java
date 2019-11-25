@@ -17,6 +17,9 @@ public class WebCrawler{
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.name + "/price"); //pobranie zrodla strony
         Elements webSites; //strony 1.2...3
         //Elements oneLink; //brak opcji porownaj ceny
+        //ArrayList<FoundProduct> theBestProducts= new ArrayList<FoundProduct>(3);
+        FoundProduct[] theBestProducts = new FoundProduct[3];
+        int numberOfProducts =0;
 
         do {
             Document document = connect.get();
@@ -45,6 +48,7 @@ public class WebCrawler{
                     Elements square = document.select("a.offer-row-item.gtm_or_row");
                     for (Element square1 : square) {
                         Elements price = square1.select("span.price.gtm_or_price");
+                        String productName = square1.select("span.description.gtm_or_name").text();
                         if (!price.text().isEmpty()) {  //dla stron bez porownaj ceny
                             float floatPrice = Float.parseFloat(price.text().replace(",", ".").replace(" zł", "").replace(" ", ""));
                             if (product.min_price < floatPrice && floatPrice < product.max_price) {
@@ -53,9 +57,11 @@ public class WebCrawler{
                                     if (Integer.parseInt(numberOfOpinions.text()) >= 50) { //warunek na ilosc opinii
                                         Elements reputation = square1.select("span.stars.green");  //.span.stars.green
                                         float theBestDeliveryPrice = 1000;
-                                        if (Float.parseFloat(reputation.attr("style").replace("width: ", "").replace("%", "")) >= product.reputation * 100 / 5) {//gwiazdki
+                                        float foundReputation = Float.parseFloat(reputation.attr("style").replace("width: ", "").replace("%", ""));
+                                        if (foundReputation >= product.reputation * 100 / 5) {//gwiazdki
                                             Elements url = square1.select("a.offer-row-item.gtm_or_row");
                                             System.out.println("Znalezione strony:");
+                                            System.out.println(productName);
                                             System.out.println("https://www.skapiec.pl" + url.attr("href"));
                                             System.out.println(price.text());
                                             //pobieranie kosztu dostawy
@@ -80,7 +86,7 @@ public class WebCrawler{
                                                 selector = selector.replace(String.valueOf(previousI), String.valueOf(i));
                                                 Elements sub = document.select(selector);
                                                 connect = Jsoup.connect("https://www.skapiec.pl/delivery.php" + sub.attr("href"));
-                                                System.out.println("https://www.skapiec.pl/delivery.php" + sub.attr("href"));
+                                                //System.out.println("https://www.skapiec.pl/delivery.php" + sub.attr("href"));
                                                 document = connect.get();
                                                 Elements deliveryPrice = document.select("#deliveryRulesets > tbody > tr.even > td:nth-child(2) > div:nth-child(1) > b");
                                                 Elements deliveryPrice1 = document.select("#deliveryRulesets > tbody > tr.odd > td:nth-child(2) > div > b");
@@ -99,12 +105,32 @@ public class WebCrawler{
                                                     }
                                                 }
                                             }
+                                            if(theBestDeliveryPrice == 1000){
+                                                break;
+                                            }
+
+
+                                            String[] id = url.attr("href").split("/");
+                                            int shopId = Integer.parseInt(id[3]);
+                                            numberOfProducts++;
+                                            if(numberOfProducts>0 && numberOfProducts < 3){
+                                               // FoundProduct foundProduct1 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
+                                                theBestProducts[numberOfProducts] = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
+                                            }
+                                            if(numberOfProducts>3) {
+                                                FoundProduct foundProduct2 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId);
+                                                for (int i = 0; i <= 3; i++) {
+                                                    if (foundProduct2.isItBetter(foundProduct2, theBestProducts[i]) == true) {
+                                                        theBestProducts[i] = foundProduct2;
+                                                    }
+                                                }
+                                            }
                                // tu juz mamy url cene produktu i najlepsza cene dostawy
                                // jesli theBestDeliveryPrice == 1000 to znaczy, że nie ma info o koszcie dostawy ale tez nie jest darmowa
 
 
                                         }
-                                        System.out.println("Najltansza dostawa: "+theBestDeliveryPrice);
+                                        System.out.println(theBestProducts[1]);
                                     }
 
                                 }
