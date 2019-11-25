@@ -124,8 +124,8 @@ public class WebCrawler{
                         }
                     }
                 }
-
-
+                // sortowanie dziala!!! ale wypisuje tablice 2 razy xD Ola nie ma tam u gory petli ktora robi ten kod 2 razy? xD
+              //jak dobrze rozumiem to tu sie konczy proces wyszukiwania top3 produktow wiec mozna je posortowac
 
             }
 
@@ -134,13 +134,14 @@ public class WebCrawler{
             }
         }while(webSites.size() == 1);
 
-        // sortowanie dziala!!! ale wypisuje tablice 2 razy xD Ola nie ma tam u gory petli ktora robi ten kod 2 razy? xD
-        //jak dobrze rozumiem to tu sie konczy proces wyszukiwania top3 produktow wiec mozna je posortowac
-        for(int j=0; j<3; j++){
-            System.out.println("to jest " + j + " element tablicy przed sortowaniem: ");
-            System.out.println(theBestProducts[j].getFoundProductName());
-            System.out.println(theBestProducts[j].getFoundProductPrice());
-            System.out.println(theBestProducts[j].getFoundProductTotalPrice());
+        for(int i=0; i<3; i++) {
+            if(theBestProducts[i] !=  null) {
+                System.out.println("produkt" + i + ":");
+                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
+                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
+                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
+                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
+            }
         }
 
         int change = 1;
@@ -156,15 +157,8 @@ public class WebCrawler{
                 }
             }
         }
-
-        for(int j=0; j<3; j++){
-            System.out.println("to jest " + j + " element tablicy: ");
-            System.out.println(theBestProducts[j].getFoundProductName());
-            System.out.println(theBestProducts[j].getFoundProductPrice());
-            System.out.println(theBestProducts[j].getFoundProductTotalPrice());
-        }
-
         for(int i=0; i<3; i++) {
+            System.out.println("POSORTOWANE");
             if(theBestProducts[i] !=  null) {
                 System.out.println("produkt" + i + ":");
                 System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
