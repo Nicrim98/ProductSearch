@@ -24,25 +24,6 @@ public class ShalomServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)    throws ServletException, IOException {
-        /*PrintWriter out = response.getWriter();
-
-        productName = request.getParameter("productName");
-        amount = request.getParameter("amount");
-        minPrice = request.getParameter("minPrice");
-        maxPrice = request.getParameter("maxPrice");
-        reputation = request.getParameter("reputation");
-
-        //Product p = new Product(productName, Integer.parseInt(amount), Float.parseFloat(minPrice), Float.parseFloat(maxPrice), Float.parseFloat(reputation));
-        //Controller c = new Controller();
-        //c.Search(p);
-
-        out.println("Received Data");
-        out.println(productName);
-        out.println(amount);
-        out.println(minPrice);
-        out.println(maxPrice);
-        out.println(reputation);
-        */
 
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
         view.forward(request, response);
@@ -64,7 +45,7 @@ public class ShalomServlet extends HttpServlet {
         String[] reputations =request.getParameterValues("reputation");
 
         Product[] pr = new Product[5];
-
+        counter = 0;
         // creating objects - products from class Product
         for(int i=0; i<5; i++){
             if(products[i] != "") {
@@ -76,11 +57,15 @@ public class ShalomServlet extends HttpServlet {
             }
         }
 
+        //2 methods to show search result, open existing .jsp file
+       // RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+        //view.forward(request, response);
 
-        // build HTML code
+
+        //or build HTML code and display
         String htmlRespone = "<html>";
-        htmlRespone += "<h2>Your's desired product is: " + pr[1].getName() + "</h2>";
-        htmlRespone += "<h3>In number of: " + pr[1].getAmount() + "</h3>";
+        htmlRespone += "<h2>Your's desired product is: " + pr[0].getName() + "</h2>";
+        htmlRespone += "<h3>In number of: " + pr[0].getAmount() + "</h3>";
         htmlRespone += "<h4>How many products entered: " + counter + "</h4>";
         htmlRespone += "</html>";
 

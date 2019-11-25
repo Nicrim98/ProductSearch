@@ -13,21 +13,6 @@
   </head>
   <body>
 
-  <script>
-    // na razie nie działa, użycie js żeby cen maksymalna wprowadzona przez użytkownika nie był mniejsza od minimalnej
-    // wprowadziłem do tego id w pierwszym segmencie do wypróbowania tej funkcji
-    function check(input) {
-      var maxPr = document.getElementById("max").values();
-      var minPr = document.getElementById("min").values();
-      if (minPr >= maxPr) {
-        input.setCustomValidity('Maximum price must be greater than minimum price');
-      } else {
-        // input is fine -- reset the error message
-        input.setCustomValidity('');
-      }
-    }
-  </script>
-
   <div class="container">
     <header>
       <h1>Search products</h1>
@@ -73,7 +58,7 @@
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1"></input>
+            <input name="amount" type="number" min="1" step="1" ></input>
           </div>
 
           <div class="inputField">
@@ -179,7 +164,7 @@
       <div class="segment6">
         <div class="button">
           <br>
-          <input id="submitBtn" type="submit" value="Search"></input>
+          <input id="submitBtn" type="submit" value="Search" onclick="check()"></input>
           <br><br><br>
           <input id="clear" type="reset" value="Clear">
         </div>
@@ -188,6 +173,23 @@
 
     </main>
   </div>
+
+  <script>
+    // działa ale tylko dla jednego boxa jak na razie
+    function check() {
+
+      var minPr = document.getElementById("min").value;
+      var maxPr = document.getElementById("max").value;
+
+      if (minPr > maxPr) {
+        alert("Maximum price must be greater than minimum price!");
+          document.getElementById('max').value = '';
+      } else {
+        // input is fine
+      }
+    }
+  </script>
+
   </body>
 </html>
 
