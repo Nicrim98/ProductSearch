@@ -42,20 +42,20 @@ public class FoundProduct{
         return foundProductTotalPrice;
     }
 
-    public FoundProduct isItBetter(FoundProduct firstProduct, FoundProduct secondProduct){
+    public boolean isItBetter(FoundProduct firstProduct, FoundProduct secondProduct){
 
         if(firstProduct.getFoundProductTotalPrice() > secondProduct.getFoundProductTotalPrice()){
-            return firstProduct;
+            return true;
         }
         else if(firstProduct.getFoundProductTotalPrice() < secondProduct.getFoundProductTotalPrice()){
-            return secondProduct;
+            return false;
         }
         else{
             if(firstProduct.getFoundReputation() >= secondProduct.getFoundReputation()){
-                return firstProduct;
+                return true;
             }
             else{
-                return secondProduct;
+                return false;
             }
         }
     }
