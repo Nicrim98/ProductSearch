@@ -149,7 +149,7 @@ public class WebCrawler{
         while(change > 0){
             change = 0;
             for(int i=0; i<2; i++) {
-                if(theBestProducts[i] != null){
+                if(theBestProducts[i] != null && theBestProducts[i+1] != null){
                     if (!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i + 1])) {
                         temporaryProduct = theBestProducts[i + 1];
                         theBestProducts[i + 1] = theBestProducts[i];
@@ -161,7 +161,7 @@ public class WebCrawler{
         }
         for(int i=0; i<3; i++) {
             System.out.println("POSORTOWANE");
-            if(theBestProducts[i] !=  null) {
+            if(theBestProducts[i] !=  null ) {
                 System.out.println("produkt" + i + ":");
                 System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
                 System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
