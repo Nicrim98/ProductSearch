@@ -124,6 +124,37 @@ public class WebCrawler{
                         }
                     }
                 }
+                // sortowanie dziala!!! ale wypisuje tablice 2 razy xD Ola nie ma tam u gory petli ktora robi ten kod 2 razy? xD
+              //jak dobrze rozumiem to tu sie konczy proces wyszukiwania top3 produktow wiec mozna je posortowac
+                for(int j=0; j<3; j++){
+                    System.out.println("to jest " + j + " element tablicy przed sortowaniem: ");
+                    System.out.println(theBestProducts[j].getFoundProductName());
+                    System.out.println(theBestProducts[j].getFoundProductPrice());
+                    System.out.println(theBestProducts[j].getFoundProductTotalPrice());
+                }
+
+             int change = 1;
+             FoundProduct temporaryProduct;
+             while(change > 0){
+                 change = 0;
+                 for(int i=0; i<2; i++){
+                     if(!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i+1])){
+                         temporaryProduct = theBestProducts[i+1];
+                         theBestProducts[i+1] = theBestProducts[i];
+                         theBestProducts[i] = temporaryProduct;
+                         change++;
+                     }
+                 }
+             }
+
+             for(int j=0; j<3; j++){
+                 System.out.println("to jest " + j + " element tablicy: ");
+                 System.out.println(theBestProducts[j].getFoundProductName());
+                 System.out.println(theBestProducts[j].getFoundProductPrice());
+                 System.out.println(theBestProducts[j].getFoundProductTotalPrice());
+             }
+
+
             }
 
             for (Element elem : webSites) {
@@ -152,7 +183,7 @@ public class WebCrawler{
     }
 
     public static void main(String[] args) {
-        Product p = new Product("mysz logitech g502", 1, 200, 250, 4);
+        Product p = new Product("mysz logitech g502", 1, 198, 250, 4);
         WebCrawler w = new WebCrawler();
         try {
             w.Search(p);
