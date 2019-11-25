@@ -60,10 +60,6 @@ public class WebCrawler{
                                         float foundReputation = Float.parseFloat(reputation.attr("style").replace("width: ", "").replace("%", ""));
                                         if (foundReputation >= product.reputation * 100 / 5) {//gwiazdki
                                             Elements url = square1.select("a.offer-row-item.gtm_or_row");
-                                            //System.out.println("Znalezione strony:");
-                                            //System.out.println(productName);
-                                            //System.out.println("https://www.skapiec.pl" + url.attr("href"));
-                                            //System.out.println(price.text());
                                             //pobieranie kosztu dostawy
                                             Elements delivery = square1.select("a.delivery-cost.link.gtm_oa_shipping");
                                             //darmowa dostawa
@@ -108,15 +104,14 @@ public class WebCrawler{
                                             if(theBestDeliveryPrice == 1000){
                                                 break;
                                             }
-
-
                                             String[] id = url.attr("href").split("/");
                                             int shopId = Integer.parseInt(id[3]);
-                                            numberOfProducts++;
-                                            if(numberOfProducts>0 && numberOfProducts < 3){
+                                            if(numberOfProducts>=0 && numberOfProducts < 3){
                                                // FoundProduct foundProduct1 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
                                                 theBestProducts[numberOfProducts] = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
+                                                numberOfProducts++;
                                             }
+
                                             if(numberOfProducts>3) {
                                                 FoundProduct foundProduct2 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId);
                                                 for (int i = 0; i <= 3; i++) {
@@ -124,13 +119,14 @@ public class WebCrawler{
                                                         theBestProducts[i] = foundProduct2;
                                                     }
                                                 }
+                                                numberOfProducts++;
                                             }
                                // tu juz mamy url cene produktu i najlepsza cene dostawy
                                // jesli theBestDeliveryPrice == 1000 to znaczy, że nie ma info o koszcie dostawy ale tez nie jest darmowa
 
 
                                         }
-                                        System.out.println(theBestProducts[1]);
+
                                     }
 
                                 }
