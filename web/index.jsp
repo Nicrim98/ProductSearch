@@ -24,28 +24,28 @@
         <legend>Product I:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" value="" required></input>
+            <input id="name1" name="productName" type="text" value="" required></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1" required></input>
+            <input id="amount1" name="amount" type="number" min="1" step="1" required></input>
               <%--minimum ustawione na 1, bo 0 produktów to tak średnio, dla pozostałych segmentów też zmienione już--%>
           </div>
 
           <div class="inputField">
             <%--@declare id="minprice"--%><label for="minPrice" class="inputLabel">Minimum price [pln]: </label>
-            <input id="min" name="minPrice" type="number" min="0" step="0.1" required></input>
+            <input id="min1" name="minPrice" type="number" min="0" step="0.1" required></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="maxprice"--%><label for="maxPrice" class="inputLabel">Maximum price [pln]: </label>
-            <input id="max" name="maxPrice" type="number" min="0" step="0.1" required></input>
+            <input id="max1" name="maxPrice" type="number" min="0" step="0.1" required></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input name="reputation" type="number" min="0"  max="5" step="0.5" required></input>
+            <input id="reputation1" name="reputation" type="number" min="0"  max="5" step="0.5" required></input>
           </div>
       </fieldset>
 
@@ -53,27 +53,27 @@
         <legend>Product II:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" value=""></input>
+            <input id="name2" name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1" ></input>
+            <input id="amount2" name="amount" type="number" min="1" step="1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="minprice"--%><label for="minPrice" class="inputLabel">Minimum price [pln]: </label>
-            <input name="minPrice" type="number" min="0" step="0.1"></input>
+            <input id="min2" name="minPrice" type="number" min="0" step="0.1"></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="maxprice"--%><label for="maxPrice" class="inputLabel">Maximum price [pln]: </label>
-            <input name="maxPrice" type="number" min="0" step="0.1" ></input>
+            <input id="max2" name="maxPrice" type="number" min="0" step="0.1"></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input name="reputation" type="number" min="0" max="5" step="0.5" ></input>
+            <input id="reputation2" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
           </div>
       </fieldset>
 
@@ -81,27 +81,27 @@
         <legend>Product III:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" value=""></input>
+            <input id="name3" name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1" ></input>
+            <input id="amount3" name="amount" type="number" min="1" step="1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="minprice"--%><label for="minPrice" class="inputLabel">Minimum price [pln]: </label>
-            <input name="minPrice" type="number" min="0" step="0.1" ></input>
+            <input id="min3" name="minPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="maxprice"--%><label for="maxPrice" class="inputLabel">Maximum price [pln]: </label>
-            <input name="maxPrice" type="number" min="0" step="0.1" ></input>
+            <input id="max3" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input name="reputation" type="number" min="0" max="5" step="0.5" ></input>
+            <input id="reputation3" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
           </div>
       </fieldset>
 
@@ -109,27 +109,27 @@
         <legend>Product IV:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" value=""></input>
+            <input id="name4" name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1" ></input>
+            <input id="amount4" name="amount" type="number" min="1" step="1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="minprice"--%><label for="minPrice" class="inputLabel">Minimum price [pln]: </label>
-            <input name="minPrice" type="number" min="0" step="0.1" ></input>
+            <input id="min4" name="minPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="maxprice"--%><label for="maxPrice" class="inputLabel">Maximum price [pln]: </label>
-            <input name="maxPrice" type="number" min="0" step="0.1" ></input>
+            <input id="max4" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input name="reputation" type="number" min="0" max="5" step="0.5" ></input>
+            <input id="reputation4" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
           </div>
       </fieldset>
 
@@ -137,34 +137,34 @@
         <legend>Product V:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
-            <input name="productName" type="text" value=""></input>
+            <input id="name5" name="productName" type="text" value=""></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="amount"--%><label for="amount" class="inputLabel">Amount: </label>
-            <input name="amount" type="number" min="1" step="1" ></input>
+            <input id="amount5" name="amount" type="number" min="1" step="1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="minprice"--%><label for="minPrice" class="inputLabel">Minimum price [pln]: </label>
-            <input name="minPrice" type="number" min="0" step="0.1" ></input>
+            <input id="min5" name="minPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="maxprice"--%><label for="maxPrice" class="inputLabel">Maximum price [pln]: </label>
-            <input name="maxPrice" type="number" min="0" step="0.1" ></input>
+            <input id="max5" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
           <div class="inputField">
             <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input name="reputation" type="number" min="0" max="5" step="0.5" ></input>
+            <input id="reputation5" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
           </div>
       </fieldset>
 
       <div class="segment6">
         <div class="button">
           <br>
-          <input id="submitBtn" type="submit" value="Search" onclick="check()"></input>
+          <input id="submitBtn" type="submit" value="Search" onclick="check();validate();" ></input>
           <br><br><br>
           <input id="clear" type="reset" value="Clear">
         </div>
@@ -176,9 +176,49 @@
 
   <script>
     // działa ale tylko dla jednego boxa jak na razie
-    function check() {
 
-      var minPr = document.getElementById("min").value;
+    function validate() {
+        var i;
+        for (i = 2; i <= 5; i++) {
+            var nameTmp = "name" + i;
+            var amountTmp = "amount" + i;
+            var minTmp = "min" + i;
+            var maxTmp = "max" + i;
+            var reputationTmp = "reputation" + i;
+            if(document.getElementById(nameTmp).value != ""){
+                document.getElementById(nameTmp).required = true;
+                document.getElementById(amountTmp).required = true;
+                document.getElementById(minTmp).required = true;
+                document.getElementById(maxTmp).required = true;
+                document.getElementById(reputationTmp).required = true;
+            }
+            else{
+                document.getElementById(nameTmp).required = false;
+                document.getElementById(amountTmp).required = false;
+                document.getElementById(minTmp).required = false;
+                document.getElementById(maxTmp).required = false;
+                document.getElementById(reputationTmp).required = false;
+            }
+        }
+    }
+
+    function check() {
+        var i;
+        for (i = 1; i <= 5; i++) {
+            var minTmp = "min" + i;
+            var maxTmp = "max" + i;
+            var minPr = document.getElementById(minTmp).value;
+            var maxPr = document.getElementById(maxTmp).value;
+
+            if (minPr > maxPr) {
+                alert("Maximum price must be greater than minimum price!");
+                document.getElementById(maxTmp).value = '';
+            } else {
+                // input is fine
+            }
+        }
+        //var minPr = document.getElementById("segment1.min").value;
+     /*
       var maxPr = document.getElementById("max").value;
 
       if (minPr > maxPr) {
@@ -186,7 +226,7 @@
           document.getElementById('max').value = '';
       } else {
         // input is fine
-      }
+      }*/
     }
   </script>
 

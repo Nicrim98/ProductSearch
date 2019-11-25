@@ -14,7 +14,7 @@ public class WebCrawler{
 
         // pobieranie odp rzeczy w ifach
         //spr ceny zanim wejdzie w link do "comparePriceLink"
-        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.name + "/price"); //pobranie zrodla strony
+        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName() + "/price"); //pobranie zrodla strony
         Elements webSites; //strony 1.2...3
         //Elements oneLink; //brak opcji porownaj ceny
 

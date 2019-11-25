@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
 @WebServlet("/parameters")
         //(name = "ShalomServlet", urlPatterns = {"/parameters"})
 public class ShalomServlet extends HttpServlet {
@@ -55,6 +56,13 @@ public class ShalomServlet extends HttpServlet {
             else{
                 break;
             }
+        }
+
+        WebCrawler web = new WebCrawler();
+        try {
+            web.Search(pr[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         //2 methods to show search result, open existing .jsp file
