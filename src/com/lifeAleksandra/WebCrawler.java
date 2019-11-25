@@ -142,6 +142,15 @@ public class WebCrawler{
         }
 
     }
+
+    public FoundProduct[] Test(Product product) throws IOException {
+        FoundProduct[] f = new FoundProduct[3];
+        f[0] = new FoundProduct(product.getName() + " pierwszy", 100, 10, 4, 404, "https://www.onet.pl/");
+        f[1] = new FoundProduct(product.getName() + " drugi", 200, 10, 3, 405, "https://b");
+        f[2] = new FoundProduct(product.getName() + " trzeci", 300, 20, 4, 406, "https://c");
+        return f;
+    }
+
     public static void main(String[] args) {
         Product p = new Product("mysz logitech g502", 1, 200, 250, 4);
         WebCrawler w = new WebCrawler();
