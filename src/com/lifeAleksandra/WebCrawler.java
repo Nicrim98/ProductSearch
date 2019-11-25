@@ -114,13 +114,45 @@ public class WebCrawler{
 
                                             if(numberOfProducts>3) {
                                                 FoundProduct foundProduct2 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId);
-                                                for (int i = 0; i <= 3; i++) {
-                                                    if (foundProduct2.isItBetter(foundProduct2, theBestProducts[i]) == true) {
+                                                FoundProduct eliminatedOne;
+                                                FoundProduct eliminatedTwo;
+
+                                                for (int i = 0; i < 3; i++) {
+                                                    if (foundProduct2.isItBetter(foundProduct2, theBestProducts[i])) {
+                                                        eliminatedOne = theBestProducts[i];
                                                         theBestProducts[i] = foundProduct2;
+
+                                                        if(i<2) {
+                                                            if (eliminatedOne.isItBetter(eliminatedOne, theBestProducts[i+1])) {
+                                                                eliminatedTwo = theBestProducts[i + 1];
+                                                                theBestProducts[i + 1] = eliminatedOne;
+
+
+                                                                if (i < 1) {
+                                                                    if (eliminatedTwo.isItBetter(eliminatedTwo, theBestProducts[i + 2])) {
+                                                                        theBestProducts[i + 2] = eliminatedTwo;
+                                                                    }
+                                                                }
+                                                            }
+                                                            // tu jest zawsze flalse!!!!
+                                                            else if(i<1 && eliminatedOne.isItBetter(eliminatedOne, theBestProducts[i+2]) == true){
+                                                                theBestProducts[i+2] = eliminatedOne;
+                                                                }
+
+
+                                                        }
+
                                                     }
+
+
                                                 }
                                                 numberOfProducts++;
                                             }
+
+                                            //System.out.println(theBestProducts);
+
+
+
                                // tu juz mamy url cene produktu i najlepsza cene dostawy
                                // jesli theBestDeliveryPrice == 1000 to znaczy, że nie ma info o koszcie dostawy ale tez nie jest darmowa
 
@@ -152,6 +184,12 @@ public class WebCrawler{
 
 
         }while(webSites.size() == 1);
+
+        for(int i=0;i <3; i++) {
+            System.out.println(theBestProducts[i].getFoundProductName());
+            System.out.println(theBestProducts[i].getFoundProductTotalPrice());
+            System.out.println(theBestProducts[i].getFoundProductPrice());
+        }
 
     }
 
