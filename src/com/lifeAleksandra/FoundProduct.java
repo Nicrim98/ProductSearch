@@ -8,14 +8,16 @@ public class FoundProduct{
     protected float foundProductTotalPrice;
     protected float foundReputation;
     protected int shopId;
+    protected String url;
 
-    public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, int shopId) {
+    public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, int shopId, String url) {
         this.foundProductName = foundProductName;
         this.foundProductPrice = foundProductPrice;
         this.foundDeliveryPrice = foundDeliveryPrice;
         this.foundReputation = foundReputation;
         foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
         this.shopId = shopId;
+        this.url = url;
     }
 
     public String getFoundProductName() {
@@ -41,13 +43,16 @@ public class FoundProduct{
     public float getFoundProductTotalPrice() {
         return foundProductTotalPrice;
     }
+    public String getUrl() {
+        return url;
+    }
 
     public boolean isItBetter(FoundProduct firstProduct, FoundProduct secondProduct){
 
-        if(firstProduct.getFoundProductTotalPrice() > secondProduct.getFoundProductTotalPrice()){
+        if(firstProduct.getFoundProductTotalPrice() < secondProduct.getFoundProductTotalPrice()){
             return true;
         }
-        else if(firstProduct.getFoundProductTotalPrice() < secondProduct.getFoundProductTotalPrice()){
+        else if(firstProduct.getFoundProductTotalPrice() > secondProduct.getFoundProductTotalPrice()){
             return false;
         }
         else{
