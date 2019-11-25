@@ -148,12 +148,14 @@ public class WebCrawler{
         FoundProduct temporaryProduct;
         while(change > 0){
             change = 0;
-            for(int i=0; i<2; i++){
-                if(!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i+1])){
-                    temporaryProduct = theBestProducts[i+1];
-                    theBestProducts[i+1] = theBestProducts[i];
-                    theBestProducts[i] = temporaryProduct;
-                    change++;
+            for(int i=0; i<2; i++) {
+                if(theBestProducts[i] != null){
+                    if (!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i + 1])) {
+                        temporaryProduct = theBestProducts[i + 1];
+                        theBestProducts[i + 1] = theBestProducts[i];
+                        theBestProducts[i] = temporaryProduct;
+                        change++;
+                    }
                 }
             }
         }
