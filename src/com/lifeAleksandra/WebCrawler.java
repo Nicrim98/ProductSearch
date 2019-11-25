@@ -124,35 +124,7 @@ public class WebCrawler{
                         }
                     }
                 }
-                // sortowanie dziala!!! ale wypisuje tablice 2 razy xD Ola nie ma tam u gory petli ktora robi ten kod 2 razy? xD
-              //jak dobrze rozumiem to tu sie konczy proces wyszukiwania top3 produktow wiec mozna je posortowac
-                for(int j=0; j<3; j++){
-                    System.out.println("to jest " + j + " element tablicy przed sortowaniem: ");
-                    System.out.println(theBestProducts[j].getFoundProductName());
-                    System.out.println(theBestProducts[j].getFoundProductPrice());
-                    System.out.println(theBestProducts[j].getFoundProductTotalPrice());
-                }
 
-             int change = 1;
-             FoundProduct temporaryProduct;
-             while(change > 0){
-                 change = 0;
-                 for(int i=0; i<2; i++){
-                     if(!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i+1])){
-                         temporaryProduct = theBestProducts[i+1];
-                         theBestProducts[i+1] = theBestProducts[i];
-                         theBestProducts[i] = temporaryProduct;
-                         change++;
-                     }
-                 }
-             }
-
-             for(int j=0; j<3; j++){
-                 System.out.println("to jest " + j + " element tablicy: ");
-                 System.out.println(theBestProducts[j].getFoundProductName());
-                 System.out.println(theBestProducts[j].getFoundProductPrice());
-                 System.out.println(theBestProducts[j].getFoundProductTotalPrice());
-             }
 
 
             }
@@ -161,6 +133,36 @@ public class WebCrawler{
                connect = Jsoup.connect("https://www.skapiec.pl" + elem.attr("href"));
             }
         }while(webSites.size() == 1);
+
+        // sortowanie dziala!!! ale wypisuje tablice 2 razy xD Ola nie ma tam u gory petli ktora robi ten kod 2 razy? xD
+        //jak dobrze rozumiem to tu sie konczy proces wyszukiwania top3 produktow wiec mozna je posortowac
+        for(int j=0; j<3; j++){
+            System.out.println("to jest " + j + " element tablicy przed sortowaniem: ");
+            System.out.println(theBestProducts[j].getFoundProductName());
+            System.out.println(theBestProducts[j].getFoundProductPrice());
+            System.out.println(theBestProducts[j].getFoundProductTotalPrice());
+        }
+
+        int change = 1;
+        FoundProduct temporaryProduct;
+        while(change > 0){
+            change = 0;
+            for(int i=0; i<2; i++){
+                if(!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i+1])){
+                    temporaryProduct = theBestProducts[i+1];
+                    theBestProducts[i+1] = theBestProducts[i];
+                    theBestProducts[i] = temporaryProduct;
+                    change++;
+                }
+            }
+        }
+
+        for(int j=0; j<3; j++){
+            System.out.println("to jest " + j + " element tablicy: ");
+            System.out.println(theBestProducts[j].getFoundProductName());
+            System.out.println(theBestProducts[j].getFoundProductPrice());
+            System.out.println(theBestProducts[j].getFoundProductTotalPrice());
+        }
 
         for(int i=0; i<3; i++) {
             if(theBestProducts[i] !=  null) {
