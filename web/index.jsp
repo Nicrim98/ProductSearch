@@ -207,11 +207,12 @@
         for (i = 1; i <= 5; i++) {
             var minTmp = "min" + i;
             var maxTmp = "max" + i;
-            var minPr = document.getElementById(minTmp).value;
-            var maxPr = document.getElementById(maxTmp).value;
+            var minPr = parseFloat(document.getElementById(minTmp).value);
+            var maxPr = parseFloat(document.getElementById(maxTmp).value);
 
             if (minPr > maxPr) {
                 alert("Maximum price must be greater than minimum price!");
+                alert(minPr + "    " + maxPr);
                 document.getElementById(maxTmp).value = '';
             } else {
                 // input is fine
