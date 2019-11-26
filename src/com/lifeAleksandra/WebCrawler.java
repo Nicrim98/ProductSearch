@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class WebCrawler{
 
-    public void Search(Product product) throws IOException {
+    public FoundProduct[] Search(Product product) throws IOException {
 
         // pobieranie odp rzeczy w ifach
         //spr ceny zanim wejdzie w link do "comparePriceLink"
@@ -29,7 +29,7 @@ public class WebCrawler{
             for (Element box1 : box) {
                // System.out.println("DLa boxa nr"+box.size());
                 Float priceInBox = Float.parseFloat(box1.select("strong.price.gtm_sor_price").text().replace("od ", "").replace(" ", "").replace("zł", "").replace(",", "."));
-                if (priceInBox > product.min_price && priceInBox < product.max_price) {
+                if (priceInBox >= product.min_price && priceInBox <= product.max_price) {
                     Elements comparePriceLink = box1.select("a.compare-link-1");//strona porownaj cene- kilka ofert na Skapiec.pl
                     if (comparePriceLink.text().isEmpty()) {
                         comparePriceLink = box1.select("a.more-info"); //dla stron bez porownaj ceny
@@ -43,7 +43,7 @@ public class WebCrawler{
                         String productName = square1.select("span.description.gtm_or_name").text();
                         if (!price.text().isEmpty()) {
                             float floatPrice = Float.parseFloat(price.text().replace(",", ".").replace(" zł", "").replace(" ", ""));
-                            if (product.min_price < floatPrice && floatPrice < product.max_price) {
+                            if (product.min_price <= floatPrice && floatPrice <= product.max_price) {
                                 Elements numberOfOpinions = square1.select("span.counter");
                                 if (!numberOfOpinions.text().isEmpty()) {  //spr czy są "brak opinii"
                                     if (Integer.parseInt(numberOfOpinions.text()) >= 50) { //warunek na ilosc opinii
@@ -134,15 +134,15 @@ public class WebCrawler{
             }
         }while(webSites.size() == 1);
 
-        for(int i=0; i<3; i++) {
-            if(theBestProducts[i] !=  null) {
-                System.out.println("produkt" + i + ":");
-                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
-                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
-                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
-                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
-            }
-        }
+//        for(int i=0; i<3; i++) {
+//            if(theBestProducts[i] !=  null) {
+//                System.out.println("produkt" + i + ":");
+//                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
+//                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
+//                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
+//                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
+//            }
+//        }
 
         int change = 1;
         FoundProduct temporaryProduct;
@@ -159,17 +159,17 @@ public class WebCrawler{
                 }
             }
         }
-        for(int i=0; i<3; i++) {
-            System.out.println("POSORTOWANE");
-            if(theBestProducts[i] !=  null ) {
-                System.out.println("produkt" + i + ":");
-                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
-                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
-                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
-                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
-            }
-        }
-
+//        for(int i=0; i<3; i++) {
+//            System.out.println("POSORTOWANE");
+//            if(theBestProducts[i] !=  null ) {
+//                System.out.println("produkt" + i + ":");
+//                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
+//                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
+//                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
+//                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
+//            }
+//        }
+        return theBestProducts;
     }
 
     public FoundProduct[] Test(Product product) throws IOException {
@@ -181,10 +181,20 @@ public class WebCrawler{
     }
 
     public static void main(String[] args) {
-        Product p = new Product("mysz logitech g502", 1, 198, 250, 4);
+        Product p = new Product("mysz logitech g502", 1, 239, 243, 4);
         WebCrawler w = new WebCrawler();
+        FoundProduct[] fp;
         try {
-            w.Search(p);
+            fp = w.Search(p);
+            for(int i=0; i<3; i++) {
+            if(fp[i] !=  null) {
+                System.out.println("produkt" + i + ":");
+                System.out.println("Nazwa produktu: "+fp[i].getFoundProductName());
+                System.out.println("Cena produktu: "+fp[i].getFoundProductPrice());
+                System.out.println("Cena+wysyłka: "+fp[i].getFoundProductTotalPrice());
+                System.out.println("Url produktu: "+fp[i].getUrl());
+            }
+        }
         } catch (IOException e) {
             e.printStackTrace();
         }
