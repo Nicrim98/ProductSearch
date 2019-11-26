@@ -23,11 +23,11 @@
         <legend>First best offer</legend>
           <div class="inputField">
                 <%-- Lepiej będzie użyć CSS, ale jak na razie na zwykłe wyświetlanie to daje radę :) --%>
-              <p><b>Product name: </b> ${productName1_1} <b>Price: </b>${price1_1} <b>Sklep: </b><a href="${url1_1}">link</a></p>
-            <p>Product name: ${productName1_2} </p>
-            <p>Product name: ${productName1_3} </p>
-            <p>Product name: ${productName1_4} </p>
-            <p>Product name: ${productName1_5} </p>
+            <p><b>Product name: </b> ${productName0_0} <b>Price: </b>${price0_0} <b>Sklep: </b><a href="${url0_0}">link</a></p>
+            <p><b>Product name: </b> ${productName0_1} <b>Price: </b>${price0_1} <b>Sklep: </b><a href="${url0_1}">link</a></p>
+            <p><b>Product name: </b> ${productName0_2} <b>Price: </b>${price0_2} <b>Sklep: </b><a href="${url0_2}">link</a></p>
+            <p><b>Product name: </b> ${productName0_3} <b>Price: </b>${price0_3} <b>Sklep: </b><a href="${url0_3}">link</a></p>
+            <p><b>Product name: </b> ${productName0_4} <b>Price: </b>${price0_4} <b>Sklep: </b><a href="${url0_4}">link</a></p>
 
           </div>
       </fieldset>
@@ -36,11 +36,11 @@
          <legend>Second best offer</legend>
           <div class="inputField">
 
-              <p>Product name: ${productName2_1} Price: ${price2_1}</p>
-              <p>Product name: ${productName2_2} </p>
-              <p>Product name: ${productName2_3} </p>
-              <p>Product name: ${productName2_4} </p>
-              <p>Product name: ${productName2_5} </p>
+              <p><b>Product name: </b> ${productName1_0} <b>Price: </b>${price1_0} <b>Sklep: </b><a href="${url1_0}">link</a></p>
+              <p><b>Product name: </b> ${productName1_1} <b>Price: </b>${price1_1} <b>Sklep: </b><a href="${url1_1}">link</a></p>
+              <p><b>Product name: </b> ${productName1_2} <b>Price: </b>${price1_2} <b>Sklep: </b><a href="${url1_2}">link</a></p>
+              <p><b>Product name: </b> ${productName1_3} <b>Price: </b>${price1_3} <b>Sklep: </b><a href="${url1_3}">link</a></p>
+              <p><b>Product name: </b> ${productName1_4} <b>Price: </b>${price1_4} <b>Sklep: </b><a href="${url1_4}">link</a></p>
 
           </div>
         </fieldset>
@@ -49,11 +49,11 @@
          <legend>Third best offer</legend>
           <div id="3" class="inputField">
 
-              <p>Product name: ${productName3_1} Price: ${price3_1}</p>
-              <p>Product name: ${productName3_2} </p>
-              <p>Product name: ${productName3_3} </p>
-              <p>Product name: ${productName3_4} </p>
-              <p>Product name: ${productName3_5 } </p>
+              <p><b>Product name: </b> ${productName2_0} <b>Price: </b>${price2_0} <b>Sklep: </b><a href="${url2_0}">link</a></p>
+              <p><b>Product name: </b> ${productName2_1} <b>Price: </b>${price2_1} <b>Sklep: </b><a href="${url2_1}">link</a></p>
+              <p><b>Product name: </b> ${productName2_2} <b>Price: </b>${price2_2} <b>Sklep: </b><a href="${url2_2}">link</a></p>
+              <p><b>Product name: </b> ${productName2_3} <b>Price: </b>${price2_3} <b>Sklep: </b><a href="${url2_3}">link</a></p>
+              <p><b>Product name: </b> ${productName2_4} <b>Price: </b>${price2_4} <b>Sklep: </b><a href="${url2_4}">link</a></p>
 
           </div>
       </fieldset>

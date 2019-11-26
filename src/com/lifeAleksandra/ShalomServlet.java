@@ -21,6 +21,7 @@ public class ShalomServlet extends HttpServlet {
     public static String maxPrice;
     public static String reputation;
     protected int counter = 0;
+    protected final int zestawienia = 3;
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)    throws ServletException, IOException {
@@ -58,38 +59,43 @@ public class ShalomServlet extends HttpServlet {
 
         // web crawling for user's desired products
         WebCrawler web = new WebCrawler();
-        FoundProduct[] test = new FoundProduct[3];
+        FoundProduct[] options = new FoundProduct[zestawienia];
+        FoundProduct[][] results = new FoundProduct[zestawienia][5];
+        // tworzymy zetawienia więc [3] <- max. ilość zestawień, [5] <- max. ilość poszukiwanych produktów
 
-        try {
-            test = web.Test(pr[0]);     // load best 3 options for the product
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(int i=0; i < counter; i++) {
+
+            try {
+                options = web.Search(pr[i]);     // load best 3 options for the product[number of product]
+            } catch (IOException e) {
+                e.printStackTrace();
+            }                               // 0,1,2 <- odpowiednie zestawienia
+            results[0][i] = options[0];     // do pierwszego zestawienia opcja 1  // options[0] <- najlepsza oferta
+            results[1][i] = options[1];     // do drugiego zestawienia opcja 2
+            results[2][i] = options[2];     // do trzeciego zestawienia opcja 3
         }
 
-        //2 methods to show search result, open existing .jsp file
+
+        //show search result, open existing .jsp file
         String destination = "output.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
 
-        request.setAttribute("productName1_1", test[0].foundProductName);
-        request.setAttribute("price1_1", test[0].foundProductPrice);
-        request.setAttribute("url1_1", test[0].url);
-        request.setAttribute("productName2_1", test[1].foundProductName);
+        for(int i=0; i < counter; i++) {
+            for(int j=0; j < zestawienia; j++) {
+                if(results[j][i] != null){
+                    String productNameTmp = "productName"+j+"_"+i;      // tworzenie odpowiednich zmiennych html
+                    String priceTmp = "price"+j+"_"+i;
+                    String urlTmp = "url"+j+"_"+i;
 
-        requestDispatcher.forward(request, response);
+                    request.setAttribute(productNameTmp, results[j][i].foundProductName);
+                    request.setAttribute(priceTmp, results[j][i].foundProductPrice);
+                    request.setAttribute(urlTmp, results[j][i].url);
+                }
+            }
+        }
 
-        // OUTPUT
-        // output.jsp will be html file fot the outcome of web crawling
-        // or build HTML code and display
-       /* String htmlRespone = "<html>";
-        htmlRespone += "<h2>Your's desired product is: " + test[0].getFoundProductName() + "</h2>";
-        htmlRespone += "<h3>In number of: " +  test[1].getFoundProductName() + "</h3>";
-        htmlRespone += "<h4>How many products entered: " +  test[2].getFoundProductName() + "</h4>";
-       // htmlRespone += "<h5>Web crawler... " + str + "</h5>";
-        htmlRespone += "</html>";
+        requestDispatcher.forward(request, response);   // wyświetlanie
 
-        // return response
-        writer.println(htmlRespone);
-*/
     }
 }
 
