@@ -64,16 +64,23 @@ public class ShalomServlet extends HttpServlet {
         String destination = "output.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
 
-        for(int i=0; i < counter; i++) {
-            for(int j=0; j < zestawienia; j++) {
-                if(readySets[j][i] != null){
-                    String productNameTmp = "productName"+j+"_"+i;      // tworzenie odpowiednich zmiennych html
-                    String priceTmp = "price"+j+"_"+i;
-                    String urlTmp = "url"+j+"_"+i;
+        for(int i=0; i < zestawienia; i++) {
+            float totalPriceTmp = 0;
+            for(int j=0; j < counter; j++) {
+                if(readySets[i][j] != null){
 
-                    request.setAttribute(productNameTmp, readySets[j][i].foundProductName);
-                    request.setAttribute(priceTmp, readySets[j][i].foundProductTotalPrice);
-                    request.setAttribute(urlTmp, readySets[j][i].url);
+                    String productNameTmp = "productName"+i+"_"+j;      // tworzenie odpowiednich zmiennych html
+                    String priceTmp = "price"+i+"_"+j;
+                    String urlTmp = "url"+i+"_"+j;
+                    String setPrice = "setPrice"+i;
+
+                    request.setAttribute(productNameTmp, readySets[i][j].foundProductName);
+                    request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice);
+                    request.setAttribute(urlTmp, readySets[i][j].url);
+                    totalPriceTmp += readySets[i][j].foundProductTotalPrice;
+                    if(j+1==counter){   // koniec produktów w danym zestawienie to wypisujemy cene za całość
+                        request.setAttribute(setPrice, totalPriceTmp);
+                    }
                 }
             }
         }

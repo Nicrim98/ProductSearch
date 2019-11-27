@@ -28,6 +28,7 @@
             <p><b>Product name: </b> ${productName0_2} <b>Price: </b>${price0_2} <b>Sklep: </b><a href="${url0_2}">link</a></p>
             <p><b>Product name: </b> ${productName0_3} <b>Price: </b>${price0_3} <b>Sklep: </b><a href="${url0_3}">link</a></p>
             <p><b>Product name: </b> ${productName0_4} <b>Price: </b>${price0_4} <b>Sklep: </b><a href="${url0_4}">link</a></p>
+            <p><b>Total price for whole set: ${setPrice0}</b></p>
 
           </div>
       </fieldset>
@@ -41,6 +42,7 @@
               <p><b>Product name: </b> ${productName1_2} <b>Price: </b>${price1_2} <b>Sklep: </b><a href="${url1_2}">link</a></p>
               <p><b>Product name: </b> ${productName1_3} <b>Price: </b>${price1_3} <b>Sklep: </b><a href="${url1_3}">link</a></p>
               <p><b>Product name: </b> ${productName1_4} <b>Price: </b>${price1_4} <b>Sklep: </b><a href="${url1_4}">link</a></p>
+              <p><b>Total price for whole set: ${setPrice1}</b></p>
 
           </div>
         </fieldset>
@@ -54,6 +56,7 @@
               <p><b>Product name: </b> ${productName2_2} <b>Price: </b>${price2_2} <b>Sklep: </b><a href="${url2_2}">link</a></p>
               <p><b>Product name: </b> ${productName2_3} <b>Price: </b>${price2_3} <b>Sklep: </b><a href="${url2_3}">link</a></p>
               <p><b>Product name: </b> ${productName2_4} <b>Price: </b>${price2_4} <b>Sklep: </b><a href="${url2_4}">link</a></p>
+              <p><b>Total price for whole set: ${setPrice2}</b></p>
 
           </div>
       </fieldset>
