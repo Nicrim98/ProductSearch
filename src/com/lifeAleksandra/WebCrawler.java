@@ -14,7 +14,7 @@ public class WebCrawler{
 
         // pobieranie odp rzeczy w ifach
         //spr ceny zanim wejdzie w link do "comparePriceLink"
-        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName() + "/price"); //pobranie zrodla strony
+        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
         Elements webSites; //strony 1.2...3
         //Elements oneLink; //brak opcji porownaj ceny
         //ArrayList<FoundProduct> theBestProducts= new ArrayList<FoundProduct>(3);
@@ -181,7 +181,7 @@ public class WebCrawler{
     }
 
     public static void main(String[] args) {
-        Product p = new Product("mysz logitech g502", 1, 239, 243, 4);
+        Product p = new Product("iphone 8", 1, 1500, 2300, 4);
         WebCrawler w = new WebCrawler();
         FoundProduct[] fp;
         try {
