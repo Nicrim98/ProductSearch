@@ -23,7 +23,7 @@
         <legend>First best offer</legend>
           <div class="inputField">
                 <%-- Lepiej będzie użyć CSS bądźbootstrapa, ale jak na razie na zwykłe wyświetlanie to daje radę :) --%>
-            <p><b>Product name: </b> ${productName0_0} <b>Price: </b>${price0_0} <b>Sklep: </b><a href="${url0_0}">link</a></p>
+            <p><b>Product name: </b> ${productName0_0} <b>Price with delivery: </b>${price0_0} <b>Sklep: </b><a href="${url0_0}">link</a></p>
             <p><b>Product name: </b> ${productName0_1} <b>Price: </b>${price0_1} <b>Sklep: </b><a href="${url0_1}">link</a></p>
             <p><b>Product name: </b> ${productName0_2} <b>Price: </b>${price0_2} <b>Sklep: </b><a href="${url0_2}">link</a></p>
             <p><b>Product name: </b> ${productName0_3} <b>Price: </b>${price0_3} <b>Sklep: </b><a href="${url0_3}">link</a></p>
@@ -36,7 +36,7 @@
          <legend>Second best offer</legend>
           <div class="inputField">
 
-              <p><b>Product name: </b> ${productName1_0} <b>Price: </b>${price1_0} <b>Sklep: </b><a href="${url1_0}">link</a></p>
+              <p><b>Product name: </b> ${productName1_0} <b>Price with delivery: </b>${price1_0} <b>Sklep: </b><a href="${url1_0}">link</a></p>
               <p><b>Product name: </b> ${productName1_1} <b>Price: </b>${price1_1} <b>Sklep: </b><a href="${url1_1}">link</a></p>
               <p><b>Product name: </b> ${productName1_2} <b>Price: </b>${price1_2} <b>Sklep: </b><a href="${url1_2}">link</a></p>
               <p><b>Product name: </b> ${productName1_3} <b>Price: </b>${price1_3} <b>Sklep: </b><a href="${url1_3}">link</a></p>
@@ -45,11 +45,11 @@
           </div>
         </fieldset>
 
-      <fieldset class="segment3" onclick="hide()">
+      <fieldset class="segment3">
          <legend>Third best offer</legend>
           <div id="3" class="inputField">
 
-              <p><b>Product name: </b> ${productName2_0} <b>Price: </b>${price2_0} <b>Sklep: </b><a href="${url2_0}">link</a></p>
+              <p><b>Product name: </b> ${productName2_0} <b>Price with delivery: </b>${price2_0} <b>Sklep: </b><a href="${url2_0}">link</a></p>
               <p><b>Product name: </b> ${productName2_1} <b>Price: </b>${price2_1} <b>Sklep: </b><a href="${url2_1}">link</a></p>
               <p><b>Product name: </b> ${productName2_2} <b>Price: </b>${price2_2} <b>Sklep: </b><a href="${url2_2}">link</a></p>
               <p><b>Product name: </b> ${productName2_3} <b>Price: </b>${price2_3} <b>Sklep: </b><a href="${url2_3}">link</a></p>

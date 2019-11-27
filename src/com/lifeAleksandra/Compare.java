@@ -9,6 +9,7 @@ public class Compare {
 
     // 3 najlepsze oferty i ich shop id
     // 2 pozostałe oferty i ich shop id
+
     public FoundProduct[][] check(FoundProduct[][] tmp, int numberOfProducts) {
         FoundProduct[][] final_p = tmp;         // FoundProduct[wariacja cenowa produktu][dany produkt]
 

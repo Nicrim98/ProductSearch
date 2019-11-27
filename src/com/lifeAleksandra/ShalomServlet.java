@@ -44,7 +44,7 @@ public class ShalomServlet extends HttpServlet {
         String[] maxPrices =request.getParameterValues("maxPrice");
         String[] reputations =request.getParameterValues("reputation");
 
-        Product[] pr = new Product[5];
+        Product[] pr = new Product[5];      // domyślnie 5 produktów użytkownik może próbować szukać
         counter = 0;    // variable count how many products where inserted into form
         // creating objects - products from class Product
         for(int i=0; i<5; i++){
@@ -57,31 +57,8 @@ public class ShalomServlet extends HttpServlet {
             }
         }
 
-        // web crawling for user's desired products
-        WebCrawler web = new WebCrawler();
-       // FoundProduct[] options = new FoundProduct[zestawienia];
-        FoundProduct[] options = new FoundProduct[5];
-        //FoundProduct[][] results = new FoundProduct[zestawienia][5];
-        FoundProduct[][] results = new FoundProduct[5][5];
-        // tworzymy zetawienia więc [3] <- max. ilość zestawień, [5] <- max. ilość poszukiwanych produktów
-
-        for(int i=0; i < counter; i++) {
-
-            try {
-                options = web.Search(pr[i]);     // load best 3 options for the product[number of product]
-            } catch (IOException e) {
-                e.printStackTrace();
-            }                               // 0,1,2 <- odpowiednie zestawienia
-            results[0][i] = options[0];     // do pierwszego zestawienia opcja 1  // options[0] <- najlepsza oferta
-            results[1][i] = options[1];     // do drugiego zestawienia opcja 2
-            results[2][i] = options[2];     // do trzeciego zestawienia opcja 3
-            results[3][i] = options[3];
-            results[4][i] = options[4];
-        }   // tablica [][] naszych produktów i opcji
-
-        // wywołanie Compare
-        //Compare compare = new Compare();
-        //compare.check(results);     // porownywanie ofert czy nie sa z tego samego sklepu co by zmniejszylo by koszt dostawy
+        Set s = new Set();
+        FoundProduct[][] readySets = s.makeSets(pr, counter);
 
         //show search result, open existing .jsp file
         String destination = "output.jsp";
@@ -89,14 +66,14 @@ public class ShalomServlet extends HttpServlet {
 
         for(int i=0; i < counter; i++) {
             for(int j=0; j < zestawienia; j++) {
-                if(results[j][i] != null){
+                if(readySets[j][i] != null){
                     String productNameTmp = "productName"+j+"_"+i;      // tworzenie odpowiednich zmiennych html
                     String priceTmp = "price"+j+"_"+i;
                     String urlTmp = "url"+j+"_"+i;
 
-                    request.setAttribute(productNameTmp, results[j][i].foundProductName);
-                    request.setAttribute(priceTmp, results[j][i].foundProductPrice);
-                    request.setAttribute(urlTmp, results[j][i].url);
+                    request.setAttribute(productNameTmp, readySets[j][i].foundProductName);
+                    request.setAttribute(priceTmp, readySets[j][i].foundProductTotalPrice);
+                    request.setAttribute(urlTmp, readySets[j][i].url);
                 }
             }
         }
