@@ -14,7 +14,7 @@ public class WebCrawler{
 
         // pobieranie odp rzeczy w ifach
         //spr ceny zanim wejdzie w link do "comparePriceLink"
-        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName() + "/price"); //pobranie zrodla strony
+        Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
         Elements webSites; //strony 1.2...3
         //Elements oneLink; //brak opcji porownaj ceny
         //ArrayList<FoundProduct> theBestProducts= new ArrayList<FoundProduct>(3);
@@ -134,7 +134,7 @@ public class WebCrawler{
             }
         }while(webSites.size() == 1);
 
-//        for(int i=0; i<5; i++) {
+//        for(int i=0; i<3; i++) {
 //            if(theBestProducts[i] !=  null) {
 //                System.out.println("produkt" + i + ":");
 //                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());

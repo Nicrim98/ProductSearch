@@ -22,7 +22,7 @@
       <fieldset class="segment1">
         <legend>First best offer</legend>
           <div class="inputField">
-                <%-- Lepiej będzie użyć CSS, ale jak na razie na zwykłe wyświetlanie to daje radę :) --%>
+                <%-- Lepiej będzie użyć CSS bądźbootstrapa, ale jak na razie na zwykłe wyświetlanie to daje radę :) --%>
             <p><b>Product name: </b> ${productName0_0} <b>Price: </b>${price0_0} <b>Sklep: </b><a href="${url0_0}">link</a></p>
             <p><b>Product name: </b> ${productName0_1} <b>Price: </b>${price0_1} <b>Sklep: </b><a href="${url0_1}">link</a></p>
             <p><b>Product name: </b> ${productName0_2} <b>Price: </b>${price0_2} <b>Sklep: </b><a href="${url0_2}">link</a></p>
