@@ -18,7 +18,7 @@ public class WebCrawler{
         Elements webSites; //strony 1.2...3
         //Elements oneLink; //brak opcji porownaj ceny
         //ArrayList<FoundProduct> theBestProducts= new ArrayList<FoundProduct>(3);
-        FoundProduct[] theBestProducts = new FoundProduct[3];
+        FoundProduct[] theBestProducts = new FoundProduct[5];
         int numberOfProducts =0;
         FoundProduct foundProduct2;
 
@@ -102,13 +102,13 @@ public class WebCrawler{
                                             //pobieranie id sklepu potrzebne do spr czy produkty pochodza z jednego sklepu
                                             String[] id = url.attr("href").split("/");
                                             int shopId = Integer.parseInt(id[3]);
-                                            if (theBestProducts[0] == null || theBestProducts[1] == null || theBestProducts[2] == null) {
+                                            if (theBestProducts[0] == null || theBestProducts[1] == null || theBestProducts[2] == null || theBestProducts[3] == null || theBestProducts[4] == null) {
                                                 // FoundProduct foundProduct1 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
                                                 theBestProducts[numberOfProducts] = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId, foundUrl);
                                                 numberOfProducts++;
                                             } else {
                                                 foundProduct2 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId, foundUrl);
-                                                for (int i = 0; i < 3; i++) {
+                                                for (int i = 0; i < 5; i++) {
                                                     if (foundProduct2.isItBetter(foundProduct2, theBestProducts[i]) == true) {
                                                         FoundProduct eliminatedOne = theBestProducts[i];
                                                         theBestProducts[i] = foundProduct2;
@@ -134,7 +134,7 @@ public class WebCrawler{
             }
         }while(webSites.size() == 1);
 
-//        for(int i=0; i<3; i++) {
+//        for(int i=0; i<5; i++) {
 //            if(theBestProducts[i] !=  null) {
 //                System.out.println("produkt" + i + ":");
 //                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
@@ -148,7 +148,7 @@ public class WebCrawler{
         FoundProduct temporaryProduct;
         while(change > 0){
             change = 0;
-            for(int i=0; i<2; i++) {
+            for(int i=0; i<4 ; i++) {
                 if(theBestProducts[i] != null && theBestProducts[i+1] != null){
                     if (!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i + 1])) {
                         temporaryProduct = theBestProducts[i + 1];
@@ -159,7 +159,7 @@ public class WebCrawler{
                 }
             }
         }
-//        for(int i=0; i<3; i++) {
+//        for(int i=0; i<5; i++) {
 //            System.out.println("POSORTOWANE");
 //            if(theBestProducts[i] !=  null ) {
 //                System.out.println("produkt" + i + ":");
@@ -181,12 +181,12 @@ public class WebCrawler{
     }
 
     public static void main(String[] args) {
-        Product p = new Product("mysz logitech g502", 1, 239, 243, 4);
+        Product p = new Product("iphone 6s 16gb ", 1, 500, 2000, 4);
         WebCrawler w = new WebCrawler();
         FoundProduct[] fp;
         try {
             fp = w.Search(p);
-            for(int i=0; i<3; i++) {
+            for(int i=0; i<5; i++) {
             if(fp[i] !=  null) {
                 System.out.println("produkt" + i + ":");
                 System.out.println("Nazwa produktu: "+fp[i].getFoundProductName());
