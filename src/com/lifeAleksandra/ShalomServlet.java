@@ -59,6 +59,24 @@ public class ShalomServlet extends HttpServlet {
 
         Set s = new Set();
         FoundProduct[][] readySets = s.makeSets(pr, counter);
+        // web crawling for user's desired products
+        WebCrawler web = new WebCrawler();
+        FoundProduct[] options = new FoundProduct[zestawienia];
+        FoundProduct[][] results = new FoundProduct[zestawienia][5];
+        // tworzymy zetawienia więc [3] <- max. ilość zestawień, [5] <- max. ilość poszukiwanych produktów
+
+        for(int i=0; i < counter; i++) {
+
+            try {
+                options = web.Search(pr[i],100);     // load best 3 options for the product[number of product]
+            } catch (IOException e) {
+                e.printStackTrace();
+            }                               // 0,1,2 <- odpowiednie zestawienia
+            results[0][i] = options[0];     // do pierwszego zestawienia opcja 1  // options[0] <- najlepsza oferta
+            results[1][i] = options[1];     // do drugiego zestawienia opcja 2
+            results[2][i] = options[2];     // do trzeciego zestawienia opcja 3
+        }
+
 
         //show search result, open existing .jsp file
         String destination = "output.jsp";
