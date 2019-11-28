@@ -24,7 +24,7 @@ public class Set {
         for(int i=0; i < numberOfProducts; i++) {
 
             try {
-                options = web.Search(p[i]);     // load best 3 options for the product[number of product]
+                options = web.Search(p[i], 5);     // load best 3 options for the product[number of product]
             } catch (IOException e) {
                 e.printStackTrace();
             }
