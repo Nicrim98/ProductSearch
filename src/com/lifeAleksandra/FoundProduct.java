@@ -18,7 +18,7 @@ public class FoundProduct{
         foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
         this.url = url;
         String[] id =url.split("/");
-        shopId = Integer.parseInt(id[4]);
+        shopId = Integer.parseInt(id[5]);
 
     }
 
