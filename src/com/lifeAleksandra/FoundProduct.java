@@ -22,6 +22,20 @@ public class FoundProduct{
 
     }
 
+    public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, int shopID) {
+        this.foundProductName = foundProductName;
+        this.foundProductPrice = foundProductPrice;
+        this.foundDeliveryPrice = foundDeliveryPrice;
+        this.foundReputation = foundReputation;
+        this.shopId = shopID;
+    }
+
+
+
+    public int getShopId() {
+        return shopId;
+    }
+
     public String getFoundProductName() {
         return foundProductName;
     }
@@ -39,8 +53,8 @@ public class FoundProduct{
     }
 
 
-    public float getFoundProductTotalPrice() {
-        return foundProductTotalPrice;
+    public float getFoundProductTotalPrice(){
+        return foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
     }
     public String getUrl() {
         return url;
@@ -70,4 +84,7 @@ public class FoundProduct{
         return shopId;
     }
 
+    public void setFoundDeliveryPrice(float foundDeliveryPrice) {
+        this.foundDeliveryPrice = foundDeliveryPrice;
+    }
 }

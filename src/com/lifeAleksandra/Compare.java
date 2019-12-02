@@ -32,30 +32,33 @@ public class Compare{
             boolean foundIDInProducts = false;
 
             for (int i = 0; i < numberOfProducts; i++) {
+                foundIDInProducts = false;
                 for (int j = 0; j < numberOfSets; j++) {
-                    if (defaultSet[j][i] != null) {
-                        if (defaultSet[j][i].shopId == IDs) {
-                            if (defaultSet[j][i].foundDeliveryPrice > maxDeliveryPrice) {
-                                maxDeliveryPrice = defaultSet[j][i].foundDeliveryPrice;
-                                defaultSet[j][i].foundDeliveryPrice = 0;
-                                tmp[counter][i] = defaultSet[j][i];
-                                totalPricePromisingSet += tmp[counter][i].foundProductTotalPrice;
+
+                    if (defaultSet[i][j] != null) {
+                        if (defaultSet[i][j].shopId == IDs) {
+                            if (defaultSet[i][j].getFoundDeliveryPrice() > maxDeliveryPrice) {
+                                maxDeliveryPrice = defaultSet[i][j].getFoundDeliveryPrice();
+                                defaultSet[i][j].setFoundDeliveryPrice(0);
+                                tmp[counter][i] = defaultSet[i][j];
+                                totalPricePromisingSet = totalPricePromisingSet + (tmp[counter][i].getFoundProductPrice());
                                 foundIDInProducts = true;
-                                break;
                             }
                         }
                         if ((j + 1) == numberOfSets && !foundIDInProducts) {
-                            tmp[counter][i] = defaultSet[j][i];   // jeżeli nie ma danego produktu w powiązannych sklepach to bierzemy najtańszy dany produkt :P
-                            totalPricePromisingSet += tmp[counter][i].foundProductTotalPrice;
+                            tmp[counter][i] = defaultSet[0][i];   // jeżeli nie ma danego produktu w powiązannych sklepach to bierzemy najtańszy dany produkt :P
+                            totalPricePromisingSet = totalPricePromisingSet + tmp[counter][i].getFoundProductTotalPrice();
                         }
-                        if ((i + 1) == numberOfSets && (j + 1) == numberOfProducts) { // znalezione wszystkie powiązane produkty z danym sklepem to zliczamy cenę za zestaw
-                            totalPricePromisingSet += maxDeliveryPrice;
-                            set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
-                        }
+                    }
+
+
+                    if ((i + 1) == numberOfProducts && (j + 1) == numberOfSets) { // znalezione wszystkie powiązane produkty z danym sklepem to zliczamy cenę za zestaw
+                        totalPricePromisingSet = totalPricePromisingSet + maxDeliveryPrice;
+                        set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
                     }
                 }
             }
-            counter += 1;
+            counter = counter + 1;
         }
 
         Sort.buble(set_tmp, counter);
@@ -64,15 +67,15 @@ public class Compare{
             if(counter < 3) {
                 if (set_tmp[i] != null) {
                     boolean change = false;
-                    if (set_tmp[i].priceForSet >= priceSet1) {
+                    if (set_tmp[i].priceForSet <= priceSet1) {
                         finalSet[0] = tmp[i];
                         change = true;
                     }
-                    if (set_tmp[i].priceForSet >= priceSet2 && !change) {
+                    if (set_tmp[i].priceForSet <= priceSet2 && !change) {
                         finalSet[1] = tmp[i];
                         change = true;
                     }
-                    if (set_tmp[i].priceForSet >= priceSet3 && !change) {
+                    if (set_tmp[i].priceForSet <= priceSet3 && !change) {
                         finalSet[2] = tmp[i];
                     }
                 }
