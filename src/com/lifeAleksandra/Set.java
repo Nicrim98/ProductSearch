@@ -60,7 +60,7 @@ public class Set implements Runnable{
 
             //Compare compare = new Compare();
             //compare.check();
-
+            // compare XD
         }
         return sets;
     }
