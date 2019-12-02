@@ -11,28 +11,18 @@ import java.util.ArrayList;
 
 public class WebCrawler{
 
-    public FoundProduct[] Search(Product product, int howManyWebSites) throws IOException {
+    public ArrayList Search(Product product, int howManyWebSites) throws IOException {
 
-        // pobieranie odp rzeczy w ifach
-        //spr ceny zanim wejdzie w link do "comparePriceLink"
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
-        Elements webSites; //strony 1.2...3
-        //Elements oneLink; //brak opcji porownaj ceny
-        //ArrayList<FoundProduct> theBestProducts= new ArrayList<FoundProduct>(3);
-        FoundProduct[] theBestProducts = new FoundProduct[5];
-        int numberOfProducts =0;
-        FoundProduct foundProduct2;
-        int spr = 0;
+        Elements webSites; //strony 1.23..
         int numberOfWebSites = 0;
-        ArrayList<FoundProduct> listOfProducts = null;
+        ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
 
             do {
                 Document document = connect.get();
                 webSites = document.select("a.pager-btn.arrow.right"); //strong.price.gtm_sor_price //strony z wynikami wyszukiwania 1,2,3...
                 Elements box = document.select("div.box-row.js");
-                //System.out.println(box.size());
                     for (Element box1 : box) {
-                        // System.out.println("DLa boxa nr"+box.size());
                         Float priceInBox = Float.parseFloat(box1.select("strong.price.gtm_sor_price").text().replace("od ", "").replace(" ", "").replace("zł", "").replace(",", "."));
                         if (priceInBox >= product.min_price-0.1*product.min_price && priceInBox <= product.max_price) {
                             Elements comparePriceLink = box1.select("a.compare-link-1");//strona porownaj cene- kilka ofert na Skapiec.pl
@@ -104,27 +94,9 @@ public class WebCrawler{
                                                         break;
                                                     }
                                                     //Tu bym zrobiła tylko dodanie produktu do arrayListy
+
                                                     listOfProducts.add(new FoundProduct(productName,floatPrice, theBestDeliveryPrice, foundReputation, foundUrl));
 
-
-                                                    //pobieranie id sklepu potrzebne do spr czy produkty pochodza z jednego sklepu
-                                                    String[] id = url.attr("href").split("/");
-                                                    int shopId = Integer.parseInt(id[3]);
-                                                    if (theBestProducts[0] == null || theBestProducts[1] == null || theBestProducts[2] == null || theBestProducts[3] == null || theBestProducts[4] == null) {
-                                                        // FoundProduct foundProduct1 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation,shopId);
-                                                        theBestProducts[numberOfProducts] = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId, foundUrl);
-                                                        numberOfProducts++;
-                                                    } else {
-                                                        foundProduct2 = new FoundProduct(productName, floatPrice, theBestDeliveryPrice, foundReputation, shopId, foundUrl);
-                                                        for (int i = 0; i < 5; i++) {
-                                                            if (foundProduct2.isItBetter(foundProduct2, theBestProducts[i]) == true) {
-                                                                FoundProduct eliminatedOne = theBestProducts[i];
-                                                                theBestProducts[i] = foundProduct2;
-                                                                foundProduct2 = eliminatedOne;
-                                                            }
-                                                        }
-                                                        numberOfProducts++;
-                                                    }
                                                 }
                                             }
                                         }
@@ -145,63 +117,11 @@ public class WebCrawler{
                 }
         }while(webSites.size() == 1);
 
-        int change = 1;
-        FoundProduct temporaryProduct;
-        while(change > 0){
-            change = 0;
-            for(int i=0; i<4; i++) {
-                if(theBestProducts[i] != null && theBestProducts[i+1] != null){
-                    if (!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i + 1])) {
-                        temporaryProduct = theBestProducts[i + 1];
-                        theBestProducts[i + 1] = theBestProducts[i];
-                        theBestProducts[i] = temporaryProduct;
-                        change++;
-                    }
-                }
-            }
-        }
-        return theBestProducts;
-    }
+            // Dodac sortowanie
 
-    public FoundProduct[] Test(Product product) throws IOException {
-        FoundProduct[] f = new FoundProduct[3];
-        f[0] = new FoundProduct(product.getName() + " pierwszy", 100, 10, 4, "https://www.onet.pl/");
-        f[1] = new FoundProduct(product.getName() + " drugi", 200, 10, 3, "https://b");
-        f[2] = new FoundProduct(product.getName() + " trzeci", 300, 20, 4, "https://c");
-        return f;
+        return listOfProducts;
     }
-
     public static void main(String[] args) {
         Product p = new Product("iphone 6s", 1, 900, 10000, 4);
-        //Product p1 = new Product("lenovo x1 i7 8GB", 1, 4000, 7000, 4);
-        WebCrawler w = new WebCrawler();
-        FoundProduct[] fp;
-        FoundProduct[] fp1;
-        try {
-            fp = w.Search(p,5); //20boxow to 1 strona
-        //    fp1 = w.Search(p1);
-//            for(int i=0; i<3; i++) {
-//                if (fp[i] != null) {
-//                    System.out.println("produkt" + i + ":");
-//                    System.out.println("Nazwa produktu: " + fp[i].getFoundProductName());
-//                    System.out.println("Cena produktu: " + fp[i].getFoundProductPrice());
-//                    System.out.println("Cena+wysyłka: " + fp[i].getFoundProductTotalPrice());
-//                    System.out.println("Url produktu: " + fp[i].getUrl());
-//                }
-//            }
-
-            for(int i=0; i<5; i++) {
-                if(fp[i] !=  null) {
-                    System.out.println("produkt" + i + ":");
-                    System.out.println("Nazwa produktu: "+fp[i].getFoundProductName());
-                    System.out.println("Cena produktu: "+fp[i].getFoundProductPrice());
-                    System.out.println("Cena+wysyłka: "+fp[i].getFoundProductTotalPrice());
-                    System.out.println("Url produktu: "+fp[i].getUrl());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 }
