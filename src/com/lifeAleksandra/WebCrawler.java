@@ -18,11 +18,10 @@ public class WebCrawler {
         return listOfProducts;
     }
 
-    public ArrayList<FoundProduct> Search(Product product, int howManyWebSites) throws IOException {
+    public ArrayList<FoundProduct> Search(Product product, int time) throws IOException {
 
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
         Elements webSites; //strony 1.23..
-        int numberOfWebSites = 0;
        // ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
         Timestamp start = new Timestamp(System.currentTimeMillis());
 
@@ -49,7 +48,7 @@ public class WebCrawler {
                 t.run();
                 Timestamp end = new Timestamp(System.currentTimeMillis());
                 System.out.println((end.getTime()-start.getTime())/1000);
-                if((end.getTime()-start.getTime())/1000>=3){
+                if((end.getTime()-start.getTime())/1000>=time){
                     break;
                 }
             }
@@ -57,10 +56,6 @@ public class WebCrawler {
                 connect = Jsoup.connect("https://www.skapiec.pl" + elem.attr("href"));
             }
 
-            numberOfWebSites++;
-            if (numberOfWebSites > howManyWebSites) {
-                break;
-            }
         } while (webSites.size() == 1);
 
         System.out.println("Ile produktow: "+listOfProducts.size());
@@ -161,7 +156,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("iphone 6s", 1, 900, 10000, 4);
+            Product p = new Product("iphone 6s 16GB", 1, 900, 10000, 4);
             WebCrawler w = new WebCrawler();
             try {
                 w.Search(p,5);
@@ -172,9 +167,8 @@ public class WebCrawler {
             System.out.println((end.getTime()-start.getTime())/1000);
             for(int i=0; i<w.getListOfProducts().size();i++){
                 System.out.println(w.getListOfProducts().get(i).getFoundProductTotalPrice());
+                System.out.println(w.getListOfProducts().get(i).getFoundProductName());
             }
-
-
     }
     }
 
