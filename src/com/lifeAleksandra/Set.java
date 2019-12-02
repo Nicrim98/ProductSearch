@@ -1,6 +1,7 @@
 package com.lifeAleksandra;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Set {
     // klasa która będzie zbierać zestawienia produktów
@@ -15,7 +16,7 @@ public class Set {
     public FoundProduct[][] makeSets(Product[] p, int numberOfProducts){
 
         WebCrawler web = new WebCrawler();
-        FoundProduct[] options = new FoundProduct[5];   // 5 najlepszych opcji dostajemy od webcrawlera
+        ArrayList<FoundProduct> options = new ArrayList<FoundProduct>(5);   // 5 najlepszych opcji dostajemy od webcrawlera
         FoundProduct[][] sets = new FoundProduct[3][numberOfProducts];  // wybiermay 3 zestawy z wyszukiwanych produktów
 
 
@@ -29,9 +30,9 @@ public class Set {
                 e.printStackTrace();
             }
 
-            sets[numberOfSets-3][i] = options[0];     // Najlepsze zestawienie czytaj najtańsze (webcrawler zwraca posortowane od najtańszego)
-            sets[numberOfSets-2][i] = options[1];     // 2 najlepsze zestawienie
-            sets[numberOfSets-1][i] = options[2];     // ostatnine zestawienie
+            sets[numberOfSets-3][i] = options.get(0);     // Najlepsze zestawienie czytaj najtańsze (webcrawler zwraca posortowane od najtańszego)
+            sets[numberOfSets-2][i] = options.get(1);     // 2 najlepsze zestawienie
+            sets[numberOfSets-1][i] = options.get(2);     // ostatnine zestawienie
         }
 
         return sets;
