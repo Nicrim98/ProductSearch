@@ -61,7 +61,7 @@ public class Compare{
         Sort.buble(set_tmp, counter);
 
         for(int i=0; i < counter; i++){
-            if(counter != 0 && counter < 3) {
+            if(counter < 3) {
                 if (set_tmp[i] != null) {
                     boolean change = false;
                     if (set_tmp[i].priceForSet >= priceSet1) {
