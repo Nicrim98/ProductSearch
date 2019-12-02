@@ -76,7 +76,8 @@ public class WebCrawler {
         // Dodac sortowanie
         Sort sort = new Sort();
         sort.buble(listOfProducts);
-
+        //sort.mergeSort(listOfProducts);
+        //listOfProducts.sort(listOfProducts.get().getFoundProductPrice());
 
         for(int i = 0; i<5;i++){
             finalAnswear.add(listOfProducts.get(i));

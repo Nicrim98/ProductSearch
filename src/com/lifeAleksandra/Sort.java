@@ -3,42 +3,46 @@ package com.lifeAleksandra;
 import java.util.ArrayList;
 
 public class Sort {
-    public static void merge(FoundProduct[] a, FoundProduct[] l, FoundProduct[] r, int left, int right) {
+    public static void merge(ArrayList<FoundProduct> a, ArrayList<FoundProduct> l, ArrayList<FoundProduct> r, int left, int right) {
         int i = 0, j = 0, k = 0;
 
         while (i < left && j < right) {
-            if (l[i].isItBetter(l[i], r[i])) { // l <= r
-                a[k++] = l[i++];
-            } else {
-                a[k++] = r[j++];
+            if(l.get(i).isItBetter(l.get(i),r.get(i))){
+                a.set(k++,l.get(i++));
+            }else{
+                a.set(k++,r.get(j++));
             }
         }
-        while (i < left) {
-            a[k++] = l[i++];
+        while(i < left){
+            a.set(k++,l.get(i++));
         }
-        while (j < right) {
-            a[k++] = r[j++];
+        while(j < right){
+            a.set(k++,r.get(j++));
         }
+
+
+
     }
-//    public  void mergeSort(ArrayList<FoundProduct> lista, int ammount = lista.size() ) {
-//        if (ammount < 2) {
-//            return;
-//        }
-//        int mid = ammount / 2;
-//        FoundProduct[] l = new FoundProduct[mid];
-//        FoundProduct[] r = new FoundProduct[ammount - mid];
-//
-//        for (int i = 0; i < mid; i++) {
-//            l[i] = a[i];
-//        }
-//        for (int i = mid; i < ammount; i++) {
-//            r[i - mid] = a[i];
-//        }
-//        mergeSort(l, mid);
-//        mergeSort(r, ammount - mid);
-//
-//        merge(a, l, r, mid, ammount - mid);
-//    }
+    public  void mergeSort(ArrayList<FoundProduct> lista) {
+        int ammount = lista.size();
+        if (ammount < 2) {
+            return;
+        }
+        int mid = ammount / 2;
+        ArrayList<FoundProduct> l = new ArrayList<FoundProduct>(mid);
+        ArrayList<FoundProduct> r = new ArrayList<FoundProduct>(ammount-mid);
+
+        for (int i = 0; i < mid; i++) {
+            l.set(i, lista.get(i));
+        }
+        for (int i = mid; i < ammount; i++) {
+            r.set((i-mid),lista.get(i));
+        }
+        mergeSort(l);
+        mergeSort(r);
+
+        merge(lista, l, r, mid, ammount - mid);
+    }
 
 
 //    public  void mergeSort(FoundProduct[] a, int ammount) {
