@@ -8,6 +8,7 @@ public class FoundProduct{
     protected float foundProductTotalPrice;
     protected float foundReputation;
     protected String url;
+    protected int shopId;
 
     public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, String url) {
         this.foundProductName = foundProductName;
@@ -16,6 +17,9 @@ public class FoundProduct{
         this.foundReputation = foundReputation;
         foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
         this.url = url;
+        String[] id =url.split("/");
+        shopId = Integer.parseInt(id[4]);
+
     }
 
     public String getFoundProductName() {
