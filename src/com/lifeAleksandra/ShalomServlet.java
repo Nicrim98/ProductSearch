@@ -85,7 +85,7 @@ public class ShalomServlet extends HttpServlet {
                 }
             }
         }
-
+        // NAPRAWA
         requestDispatcher.forward(request, response);   // wyświetlanie
 
     }
