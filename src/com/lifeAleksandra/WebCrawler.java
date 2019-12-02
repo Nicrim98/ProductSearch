@@ -13,6 +13,11 @@ import java.util.ArrayList;
 public class WebCrawler {
 
     protected ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
+    protected ArrayList<FoundProduct> finalAnswear = new ArrayList<FoundProduct>();
+
+    public ArrayList<FoundProduct> getFinalAnswear() {
+        return finalAnswear;
+    }
 
     public ArrayList<FoundProduct> getListOfProducts() {
         return listOfProducts;
@@ -24,6 +29,7 @@ public class WebCrawler {
         Elements webSites; //strony 1.23..
        // ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
         Timestamp start = new Timestamp(System.currentTimeMillis());
+        boolean out = false;
 
         do {
 
@@ -49,11 +55,18 @@ public class WebCrawler {
                 Timestamp end = new Timestamp(System.currentTimeMillis());
                 System.out.println((end.getTime()-start.getTime())/1000);
                 if((end.getTime()-start.getTime())/1000>=time){
+                    System.out.println("break!!!!!");
+                    out = true;
                     break;
                 }
             }
+
             for (Element elem : webSites) {
                 connect = Jsoup.connect("https://www.skapiec.pl" + elem.attr("href"));
+            }
+
+            if(out){
+              break;
             }
 
         } while (webSites.size() == 1);
@@ -63,7 +76,14 @@ public class WebCrawler {
         // Dodac sortowanie
         Sort sort = new Sort();
         sort.buble(listOfProducts);
-        return listOfProducts;
+
+
+        for(int i = 0; i<5;i++){
+            finalAnswear.add(listOfProducts.get(i));
+        }
+
+
+        return finalAnswear;
 
     }
 
@@ -156,7 +176,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("iphone 6s 16GB", 1, 900, 10000, 4);
+            Product p = new Product("Mysz Logitech", 1, 34, 321, 4);
             WebCrawler w = new WebCrawler();
             try {
                 w.Search(p,5);
@@ -165,9 +185,9 @@ public class WebCrawler {
             }
             Timestamp end = new Timestamp(System.currentTimeMillis());
             System.out.println((end.getTime()-start.getTime())/1000);
-            for(int i=0; i<w.getListOfProducts().size();i++){
-                System.out.println(w.getListOfProducts().get(i).getFoundProductTotalPrice());
-                System.out.println(w.getListOfProducts().get(i).getFoundProductName());
+            for(int i=0; i<w.getFinalAnswear().size();i++){
+                System.out.println(w.getFinalAnswear().get(i).getFoundProductTotalPrice());
+                System.out.println(w.getFinalAnswear().get(i).getFoundProductName());
             }
     }
     }
