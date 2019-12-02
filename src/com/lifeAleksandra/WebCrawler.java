@@ -186,9 +186,9 @@ public class WebCrawler {
             }
             Timestamp end = new Timestamp(System.currentTimeMillis());
             System.out.println((end.getTime()-start.getTime())/1000);
-            for(int i=0; i<w.getFinalAnswear().size();i++){
-                System.out.println(w.getFinalAnswear().get(i).getFoundProductTotalPrice());
-                System.out.println(w.getFinalAnswear().get(i).getFoundProductName());
+            for(int i=0; i<w.getFinalAnswer().size();i++){
+                System.out.println(w.getFinalAnswer().get(i).getFoundProductTotalPrice());
+                System.out.println(w.getFinalAnswer().get(i).getFoundProductName());
             }
     }
     }
