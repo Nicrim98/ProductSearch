@@ -3,7 +3,7 @@ package com.lifeAleksandra;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Set implements Runnable{
+public class Set{
     // klasa która będzie zbierać zestawienia produktów
     // sets[0][] / sets[1][] / set[2][] <- set0 najlepszy itd.
 
@@ -12,13 +12,18 @@ public class Set implements Runnable{
 
     // następnie w klasie Compare zamierzam patrzeć na id_sklepu i sprawdzać wtedy jeszcze tą dostawę w przypadku tego samego sklepu
     protected final int numberOfSets = 5;
+    protected float priceForSet;
     protected float priceSet1 = 0;
     protected float priceSet2 = 0;
     protected float priceSet3 = 0;
 
     protected ArrayList<Integer> shopIDs = new ArrayList<>();
 
-    public Set(){
+    public Set() {
+    }
+
+    public Set(FoundProduct[] f, float priceForSet) {
+        this.priceForSet = priceForSet;
     }
 
    /* public void run(WebCrawler web, Product p, FoundProduct[] options) {
@@ -30,14 +35,15 @@ public class Set implements Runnable{
     };
     */
 
-    public FoundProduct[][] makeSets(Product[] p, int numberOfProducts){
+    public FoundProduct[][] makeSets(Product[] p, int numberOfProducts) {
 
         WebCrawler web = new WebCrawler();
         ArrayList<FoundProduct> options = new ArrayList<FoundProduct>(5);   // 5 najlepszych opcji dostajemy od webcrawlera
         FoundProduct[][] sets = new FoundProduct[5][numberOfProducts];  // wybiermay 3 zestawy z wyszukiwanych produktów
+        FoundProduct[][] finalSet = new FoundProduct[5][numberOfProducts];
 
         // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
-        for(int i=0; i < numberOfProducts; i++) {
+        for (int i = 0; i < numberOfProducts; i++) {
 
             try {
                 options = web.Search(p[i], 5);     // load best 3 options for the product[number of product]
@@ -58,14 +64,19 @@ public class Set implements Runnable{
             sets[numberOfSets - 1][i] = options.get(4);     // ostatnine zestawienie
             shopIDs.add(options.get(4).shopId);
 
-            //Compare compare = new Compare();
-            //compare.check();
-            // compare XD
+            Compare compare = new Compare();
+            finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet1, priceSet2, priceSet3);
+
         }
-        return sets;
+        return finalSet;
     }
 
-    @Override
-    public void run(){
+    public boolean isSetBetter(Set firstSet, Set secondSet) {
+
+        if (firstSet.priceForSet < secondSet.priceForSet) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

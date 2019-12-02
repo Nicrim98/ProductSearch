@@ -9,9 +9,7 @@ public class Compare{
 
     public FoundProduct[][] check(FoundProduct[][] defaultSet, int numberOfProducts, ArrayList<Integer> shopIDs, float priceSet1, float priceSet2, float priceSet3) {
 
-        FoundProduct[][] beforeCheck = defaultSet;         // FoundProduct[wariacja cenowa produktu][dany produkt]
-
-        FoundProduct[][] tmp = null;
+        FoundProduct[][] finalSet = defaultSet;
 
         ArrayList<Integer> duplicateShopIDs = new ArrayList<Integer>();
 
@@ -24,32 +22,35 @@ public class Compare{
         }
 
         // stworzenie tych zesatawień z tańszą dosatwą i porównanie z domyślnie najtańszymi zestawami XD
-
+        FoundProduct[][] tmp = new FoundProduct[duplicateShopIDs.size()][numberOfProducts];
+        Set[] set_tmp = new Set[duplicateShopIDs.size()];
         // zastanowić się nad braniem odpowiednich produktów z zestawień do porównań shopID
-        for(int IDs : duplicateShopIDs){    // dla każdego zduplikowanego shopid szukamy powiązanych produktówz danym jednym sklepie
+
+        for(int IDs : duplicateShopIDs) {    // dla każdego zduplikowanego shopid szukamy powiązanych produktówz danym jednym sklepie
             float maxDeliveryPrice = 0;
             float totalPricePromisingSet = 0;
-            boolean foundIDinproducts = false;
+            boolean foundIDInProducts = false;
 
-            for(int i=0; i < numberOfProducts; i++) {
-                for (int j=0; j < numberOfSets; j++) {
-                    if(defaultSet[j][i] != null) {
+            for (int i = 0; i < numberOfProducts; i++) {
+                for (int j = 0; j < numberOfSets; j++) {
+                    if (defaultSet[j][i] != null) {
                         if (defaultSet[j][i].shopId == IDs) {
                             if (defaultSet[j][i].foundDeliveryPrice > maxDeliveryPrice) {
                                 maxDeliveryPrice = defaultSet[j][i].foundDeliveryPrice;
                                 defaultSet[j][i].foundDeliveryPrice = 0;
                                 tmp[counter][i] = defaultSet[j][i];
                                 totalPricePromisingSet += tmp[counter][i].foundProductTotalPrice;
-                                foundIDinproducts = true;
+                                foundIDInProducts = true;
                                 break;
                             }
-                        }if( (j+1) == numberOfSets && foundIDinproducts == false){
+                        }
+                        if ((j + 1) == numberOfSets && !foundIDInProducts) {
                             tmp[counter][i] = defaultSet[j][i];   // jeżeli nie ma danego produktu w powiązannych sklepach to bierzemy najtańszy dany produkt :P
                             totalPricePromisingSet += tmp[counter][i].foundProductTotalPrice;
                         }
                         if ((i + 1) == numberOfSets && (j + 1) == numberOfProducts) { // znalezione wszystkie powiązane produkty z danym sklepem to zliczamy cenę za zestaw
                             totalPricePromisingSet += maxDeliveryPrice;
-                            //Set s = new Set(tmp, totalPricePromisingSet);
+                            set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
                         }
                     }
                 }
@@ -57,12 +58,27 @@ public class Compare{
             counter += 1;
         }
 
-        /*for(int i=0; i < counter; i++){
-            if (tmp[counter][i]){
+        Sort.buble(set_tmp, counter);
 
+        for(int i=0; i < counter; i++){
+            if(counter != 0 && counter < 3) {
+                if (set_tmp[i] != null) {
+                    boolean change = false;
+                    if (set_tmp[i].priceForSet >= priceSet1) {
+                        finalSet[0] = tmp[i];
+                        change = true;
+                    }
+                    if (set_tmp[i].priceForSet >= priceSet2 && !change) {
+                        finalSet[1] = tmp[i];
+                        change = true;
+                    }
+                    if (set_tmp[i].priceForSet >= priceSet3 && !change) {
+                        finalSet[2] = tmp[i];
+                    }
+                }
             }
         }
-        */
-        return tmp;
+
+        return finalSet;
     }
 }
