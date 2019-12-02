@@ -13,10 +13,10 @@ import java.util.ArrayList;
 public class WebCrawler {
 
     protected ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
-    protected ArrayList<FoundProduct> finalAnswear = new ArrayList<FoundProduct>();
+    protected ArrayList<FoundProduct> finalAnswer = new ArrayList<FoundProduct>();
 
-    public ArrayList<FoundProduct> getFinalAnswear() {
-        return finalAnswear;
+    public ArrayList<FoundProduct> getFinalAnswer() {
+        return finalAnswer;
     }
 
     public ArrayList<FoundProduct> getListOfProducts() {
@@ -80,11 +80,11 @@ public class WebCrawler {
         //listOfProducts.sort(listOfProducts.get().getFoundProductPrice());
 
         for(int i = 0; i<5;i++){
-            finalAnswear.add(listOfProducts.get(i));
+            finalAnswer.add(listOfProducts.get(i));
         }
 
 
-        return finalAnswear;
+        return finalAnswer;
 
     }
 
