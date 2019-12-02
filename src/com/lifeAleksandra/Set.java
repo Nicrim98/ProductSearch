@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Set{
+    // DLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA OLIIIIIIIIIIIIIIIIIIIIIIIIIIIII <3
     // klasa która będzie zbierać zestawienia produktów
     // sets[0][] / sets[1][] / set[2][] <- set0 najlepszy itd.
 
