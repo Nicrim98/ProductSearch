@@ -8,72 +8,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
 import java.io.IOException;
 
 public class WebCrawler{
 
-
-
-    public static void merge(FoundProduct[] a, FoundProduct[] l, FoundProduct[] r , int left, int right){
-        int i=0, j=0, k=0;
-
-        while(i<left && j<right){
-            if(l[i].isItBetter(l[i],r[i])){ // l <= r
-                a[k++] = l[i++];
-            }
-            else{
-                a[k++] = r[j++];
-            }
-        }
-        while (i < left){
-            a[k++] = l[i++];
-        }
-        while(j < right){
-            a[k++] = r[j++];
-        }
-    }
-
-
-    public static void  mergeSort(FoundProduct[] a, int ammount){
-        if(ammount < 2){
-            return;
-        }
-        int mid= ammount/2;
-        FoundProduct[] l = new FoundProduct[mid];
-        FoundProduct[] r = new FoundProduct[ammount-mid];
-
-        for( int i=0; i<mid; i++){
-            l[i] = a[i];
-        }
-        for(int i=mid; i<ammount ; i++){
-            r[i-mid]=a[i];
-        }
-        mergeSort(l,mid);
-        mergeSort(r,ammount-mid);
-
-        merge(a,l,r,mid,ammount-mid);
-    }
-
-    public static void buble(FoundProduct[] a, int ammount){
-        int change = 1;
-        FoundProduct temporaryProduct;
-        while(change > 0){
-            change = 0;
-            for(int i=0; i<ammount-1; i++) {
-                if(a[i] != null && a[i+1] != null){
-                    if (!a[i].isItBetter(a[i], a[i + 1])) {
-                        temporaryProduct = a[i + 1];
-                        a[i + 1] = a[i];
-                        a[i] = temporaryProduct;
-                        change++;
-                    }
-                }
-            }
-        }
-    }
-
-
-
+    Sort s = new Sort();
 
 
     public FoundProduct[] Search(Product product, int howManyWebSites) throws IOException {
@@ -205,16 +145,17 @@ public class WebCrawler{
                 }
         }while(webSites.size() == 1);
 
-//        theBestProducts[4].buble(theBestProducts); // to dziala duzo wolniej
+//
 
         Timestamp befor_sort = new Timestamp(System.currentTimeMillis());
+
         System.out.println("czas przed sortowaniem " + befor_sort);
 
         // za ammount wpisywac liczbe produktow ktore mamy w tym pobranym z crawlera zestawieniu
         // sortowanie megazordem XD szybsze o około 6/1000 sekundy...
-        mergeSort(theBestProducts, 5);
+        s.mergeSort(theBestProducts, 5);
         //sortowanie bombelkowo-to poczatkowe
-        buble(theBestProducts, 5 );
+        s.buble(theBestProducts, 5 );
 
 
         Timestamp after_sort = new Timestamp(System.currentTimeMillis());
