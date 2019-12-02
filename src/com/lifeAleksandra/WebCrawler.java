@@ -14,7 +14,11 @@ public class WebCrawler {
 
     protected ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
 
-    public void Search(Product product, int howManyWebSites) throws IOException {
+    public ArrayList<FoundProduct> getListOfProducts() {
+        return listOfProducts;
+    }
+
+    public ArrayList<FoundProduct> Search(Product product, int howManyWebSites) throws IOException {
 
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
         Elements webSites; //strony 1.23..
@@ -62,6 +66,10 @@ public class WebCrawler {
         System.out.println("Ile produktow: "+listOfProducts.size());
 
         // Dodac sortowanie
+        Sort sort = new Sort();
+        sort.buble(listOfProducts);
+        return listOfProducts;
+
     }
 
 
@@ -153,7 +161,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("iphone 6s 16GB", 1, 900, 10000, 4);
+            Product p = new Product("iphone 6s", 1, 900, 10000, 4);
             WebCrawler w = new WebCrawler();
             try {
                 w.Search(p,5);
@@ -162,6 +170,11 @@ public class WebCrawler {
             }
             Timestamp end = new Timestamp(System.currentTimeMillis());
             System.out.println((end.getTime()-start.getTime())/1000);
+            for(int i=0; i<w.getListOfProducts().size();i++){
+                System.out.println(w.getListOfProducts().get(i).getFoundProductTotalPrice());
+            }
+
+
     }
     }
 
