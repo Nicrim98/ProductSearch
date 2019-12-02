@@ -4,6 +4,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 public class ProductTest{   // klasa do przetestowania i pokazania działania jak układane są produkty z tego samego sklepu
+                            // MYSZKA 4 NIE WESZLA DO ZESTAWOW ALE MA TO SAMO ID CO IPHONE 2 (201) I Z DOSTAWA JEDNAK WCHODZI I TO JAKO NAJLEPSZA OPCJA :3
 
     //public FoundProduct[][] check(FoundProduct[][] defaultSet, int numberOfProducts, ArrayList<Integer> shopIDs, float priceSet1, float priceSet2, float priceSet3) {
     public static void main (String[]args){
@@ -91,6 +92,8 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         Compare cos = new Compare();
         finalSet = cos.check(defs, 3, a, priceSet1, priceSet2, priceSet3);
         // wywołana funkcja czek i na dole jest jeszcze wypisanie, albo można sobie to zakompentować 'Compare' i lecieć po kolei wywołaniami pod spodem ;)
+
+
 /* CHECK CHECK CHECK
         finalSet[0][0] = defs[0][0];
         finalSet[0][1] = defs[1][0];
@@ -207,19 +210,19 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         }
         */
         System.out.println(finalSet[0][0].getFoundProductName() + " " + finalSet[0][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[0][1].getFoundProductName() + " " + finalSet[0][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[0][2].getFoundProductName() + " " + finalSet[0][2].getFoundProductTotalPrice());
+        System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[0][1].getFoundProductTotalPrice());
+        System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[0][2].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
-        System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
+        System.out.println(finalSet[0][1].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
         System.out.println(finalSet[1][1].getFoundProductName() + " " + finalSet[1][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
+        System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
-        System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
+        System.out.println(finalSet[0][2].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
+        System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
         System.out.println(finalSet[2][2].getFoundProductName() + " " + finalSet[2][2].getFoundProductTotalPrice());
     }
 }
