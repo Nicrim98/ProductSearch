@@ -7,16 +7,14 @@ public class FoundProduct{
     protected float foundDeliveryPrice;
     protected float foundProductTotalPrice;
     protected float foundReputation;
-    protected int shopId;
     protected String url;
 
-    public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, int shopId, String url) {
+    public FoundProduct(String foundProductName, float foundProductPrice, float foundDeliveryPrice, float foundReputation, String url) {
         this.foundProductName = foundProductName;
         this.foundProductPrice = foundProductPrice;
         this.foundDeliveryPrice = foundDeliveryPrice;
         this.foundReputation = foundReputation;
         foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
-        this.shopId = shopId;
         this.url = url;
     }
 
@@ -36,9 +34,6 @@ public class FoundProduct{
         return foundReputation;
     }
 
-    public int getShopId() {
-        return shopId;
-    }
 
     public float getFoundProductTotalPrice() {
         return foundProductTotalPrice;
@@ -63,6 +58,12 @@ public class FoundProduct{
                 return false;
             }
         }
+    }
+
+    public int returnShopId(){
+        String[] id = getUrl().split("/");
+        int shopId = Integer.parseInt(id[4]);
+        return shopId;
     }
 
 }

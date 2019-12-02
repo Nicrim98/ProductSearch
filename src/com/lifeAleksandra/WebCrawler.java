@@ -1,7 +1,5 @@
 package com.lifeAleksandra;
-import java.sql.SQLOutput;
-import java.sql.Timestamp;
-import java.time.Instant;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,72 +7,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class WebCrawler{
-
-
-
-    public static void merge(FoundProduct[] a, FoundProduct[] l, FoundProduct[] r , int left, int right){
-        int i=0, j=0, k=0;
-
-        while(i<left && j<right){
-            if(l[i].isItBetter(l[i],r[i])){ // l <= r
-                a[k++] = l[i++];
-            }
-            else{
-                a[k++] = r[j++];
-            }
-        }
-        while (i < left){
-            a[k++] = l[i++];
-        }
-        while(j < right){
-            a[k++] = r[j++];
-        }
-    }
-
-
-    public static void  mergeSort(FoundProduct[] a, int ammount){
-        if(ammount < 2){
-            return;
-        }
-        int mid= ammount/2;
-        FoundProduct[] l = new FoundProduct[mid];
-        FoundProduct[] r = new FoundProduct[ammount-mid];
-
-        for( int i=0; i<mid; i++){
-            l[i] = a[i];
-        }
-        for(int i=mid; i<ammount ; i++){
-            r[i-mid]=a[i];
-        }
-        mergeSort(l,mid);
-        mergeSort(r,ammount-mid);
-
-        merge(a,l,r,mid,ammount-mid);
-    }
-
-    public static void buble(FoundProduct[] a, int ammount){
-        int change = 1;
-        FoundProduct temporaryProduct;
-        while(change > 0){
-            change = 0;
-            for(int i=0; i<ammount-1; i++) {
-                if(a[i] != null && a[i+1] != null){
-                    if (!a[i].isItBetter(a[i], a[i + 1])) {
-                        temporaryProduct = a[i + 1];
-                        a[i + 1] = a[i];
-                        a[i] = temporaryProduct;
-                        change++;
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
 
     public FoundProduct[] Search(Product product, int howManyWebSites) throws IOException {
 
@@ -89,6 +24,7 @@ public class WebCrawler{
         FoundProduct foundProduct2;
         int spr = 0;
         int numberOfWebSites = 0;
+        ArrayList<FoundProduct> listOfProducts = null;
 
             do {
                 Document document = connect.get();
@@ -167,6 +103,10 @@ public class WebCrawler{
                                                     if (theBestDeliveryPrice == 1000) {
                                                         break;
                                                     }
+                                                    //Tu bym zrobiła tylko dodanie produktu do arrayListy
+                                                    listOfProducts.add(new FoundProduct(productName,floatPrice, theBestDeliveryPrice, foundReputation, foundUrl));
+
+
                                                     //pobieranie id sklepu potrzebne do spr czy produkty pochodza z jednego sklepu
                                                     String[] id = url.attr("href").split("/");
                                                     int shopId = Integer.parseInt(id[3]);
@@ -205,39 +145,29 @@ public class WebCrawler{
                 }
         }while(webSites.size() == 1);
 
-//        theBestProducts[4].buble(theBestProducts); // to dziala duzo wolniej
-
-        Timestamp befor_sort = new Timestamp(System.currentTimeMillis());
-        System.out.println("czas przed sortowaniem " + befor_sort);
-
-        // za ammount wpisywac liczbe produktow ktore mamy w tym pobranym z crawlera zestawieniu
-        // sortowanie megazordem XD szybsze o około 6/1000 sekundy...
-        mergeSort(theBestProducts, 5);
-        //sortowanie bombelkowo-to poczatkowe
-        buble(theBestProducts, 5 );
-
-
-        Timestamp after_sort = new Timestamp(System.currentTimeMillis());
-        System.out.println("czas po posortowaniu " + after_sort);
-
-//        for(int i=0; i<3; i++) {
-//            System.out.println("POSORTOWANE");
-//            if(theBestProducts[i] !=  null ) {
-//                System.out.println("produkt" + i + ":");
-//                System.out.println("Nazwa produktu: "+theBestProducts[i].getFoundProductName());
-//                System.out.println("Cena produktu: "+theBestProducts[i].getFoundProductPrice());
-//                System.out.println("Cena+wysyłka: "+theBestProducts[i].getFoundProductTotalPrice());
-//                System.out.println("Url produktu: "+theBestProducts[i].getUrl());
-//            }
-//        }
+        int change = 1;
+        FoundProduct temporaryProduct;
+        while(change > 0){
+            change = 0;
+            for(int i=0; i<4; i++) {
+                if(theBestProducts[i] != null && theBestProducts[i+1] != null){
+                    if (!theBestProducts[i].isItBetter(theBestProducts[i], theBestProducts[i + 1])) {
+                        temporaryProduct = theBestProducts[i + 1];
+                        theBestProducts[i + 1] = theBestProducts[i];
+                        theBestProducts[i] = temporaryProduct;
+                        change++;
+                    }
+                }
+            }
+        }
         return theBestProducts;
     }
 
     public FoundProduct[] Test(Product product) throws IOException {
         FoundProduct[] f = new FoundProduct[3];
-        f[0] = new FoundProduct(product.getName() + " pierwszy", 100, 10, 4, 404, "https://www.onet.pl/");
-        f[1] = new FoundProduct(product.getName() + " drugi", 200, 10, 3, 405, "https://b");
-        f[2] = new FoundProduct(product.getName() + " trzeci", 300, 20, 4, 406, "https://c");
+        f[0] = new FoundProduct(product.getName() + " pierwszy", 100, 10, 4, "https://www.onet.pl/");
+        f[1] = new FoundProduct(product.getName() + " drugi", 200, 10, 3, "https://b");
+        f[2] = new FoundProduct(product.getName() + " trzeci", 300, 20, 4, "https://c");
         return f;
     }
 
