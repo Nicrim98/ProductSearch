@@ -22,6 +22,7 @@ public class ShalomServlet extends HttpServlet {
     public static String reputation;
     protected int counter = 0;
     protected final int zestawienia = 3;
+    protected int zestawienia_cut = 0;
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)    throws ServletException, IOException {
@@ -42,14 +43,13 @@ public class ShalomServlet extends HttpServlet {
         String[] amounts =request.getParameterValues("amount");
         String[] minPrices =request.getParameterValues("minPrice");
         String[] maxPrices =request.getParameterValues("maxPrice");
-        String[] reputations =request.getParameterValues("reputation");
 
         Product[] pr = new Product[5];      // domyślnie 5 produktów użytkownik może próbować szukać
         counter = 0;    // variable count how many products where inserted into form
         // creating objects - products from class Product
         for(int i=0; i<5; i++){
             if(products[i] != "") {     //product's name is "" by default, so if the name was given in form, the product will be inserted into pr
-                pr[i] = new Product(products[i], Integer.parseInt(amounts[i]), Float.parseFloat(minPrices[i]), Float.parseFloat(maxPrices[i]), Float.parseFloat(reputations[i]));
+                pr[i] = new Product(products[i], Integer.parseInt(amounts[i]), Float.parseFloat(minPrices[i]), Float.parseFloat(maxPrices[i]))                                                                                                                                         ;
                 counter++;
             }
             else{
@@ -65,22 +65,35 @@ public class ShalomServlet extends HttpServlet {
         String destination = "output.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
 
-        for(int i=0; i < zestawienia; i++) {
-            float totalPriceTmp = 0;
-            for(int j=0; j < counter; j++) {
+        for(int i=0; i < counter; i++){
+            for(int j= 0; j < 5; j++) {
+                if (readySets[i][j] == null) {
+                    if (j <= zestawienia_cut) {
+                        zestawienia_cut = j;
+                    }
+                }
+            }
+        }
+
+        System.out.println(zestawienia_cut + "max zestawien");
+
+        for(int i=0; i < counter; i++) {
+            float[] totalPriceTmp = new float[3];
+            for(int j=0; j < zestawienia; j++) {
                 if(readySets[i][j] != null){
 
                     String productNameTmp = "productName"+i+"_"+j;      // tworzenie odpowiednich zmiennych html
                     String priceTmp = "price"+i+"_"+j;
                     String urlTmp = "url"+i+"_"+j;
-                    String setPrice = "setPrice"+i;
+                    String setPrice = "setPrice"+j;
 
                     request.setAttribute(productNameTmp, readySets[i][j].foundProductName);
                     request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice);
                     request.setAttribute(urlTmp, readySets[i][j].url);
-                    totalPriceTmp += readySets[i][j].foundProductTotalPrice;
-                    if(j+1==counter){   // koniec produktów w danym zestawienie to wypisujemy cene za całość
-                        request.setAttribute(setPrice, totalPriceTmp);
+                    totalPriceTmp[j] += readySets[i][j].foundProductTotalPrice;
+
+                    if(i+1==counter){   // koniec produktów w danym zestawienie to wypisujemy cene za całość
+                        request.setAttribute(setPrice, totalPriceTmp[j]);
                     }
                 }
             }

@@ -68,10 +68,13 @@ public class Compare{
                 if (set_tmp[i] != null) {
                     boolean change = false;
                     if (set_tmp[i].priceForSet <= priceSet1) {
+                        finalSet[2] = finalSet[1];
+                        finalSet[1] = finalSet[0];
                         finalSet[0] = tmp[i];
                         change = true;
                     }
                     if (set_tmp[i].priceForSet <= priceSet2 && !change) {
+                        finalSet[2] = finalSet[1];
                         finalSet[1] = tmp[i];
                         change = true;
                     }

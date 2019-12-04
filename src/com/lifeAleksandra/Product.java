@@ -48,11 +48,10 @@ public class Product {
         this.reputation = reputation;
     }
 
-    public Product(String name, int amount, float min_price, float max_price, float reputation) {
+    public Product(String name, int amount, float min_price, float max_price) {
         this.name = name.replace(" ", "+");
         this.amount = amount;
         this.min_price = min_price;
         this.max_price = max_price;
-        this.reputation = reputation;
     }
 }

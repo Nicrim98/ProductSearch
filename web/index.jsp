@@ -43,10 +43,6 @@
             <input id="max1" name="maxPrice" type="number" min="0" step="0.1" required></input>
           </div>
 
-          <div class="inputField">
-            <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input id="reputation1" name="reputation" type="number" min="0"  max="5" step="0.5" required></input>
-          </div>
       </fieldset>
 
       <fieldset class="segment2">
@@ -71,10 +67,6 @@
             <input id="max2" name="maxPrice" type="number" min="0" step="0.1"></input>
           </div>
 
-          <div class="inputField">
-            <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input id="reputation2" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
-          </div>
       </fieldset>
 
       <fieldset class = "segment3">
@@ -99,10 +91,6 @@
             <input id="max3" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
-          <div class="inputField">
-            <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input id="reputation3" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
-          </div>
       </fieldset>
 
       <fieldset class = "segment4">
@@ -127,10 +115,6 @@
             <input id="max4" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
-          <div class="inputField">
-            <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input id="reputation4" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
-          </div>
       </fieldset>
 
       <fieldset class = segment5>
@@ -155,10 +139,6 @@
             <input id="max5" name="maxPrice" type="number" min="0" step="0.1" ></input>
           </div>
 
-          <div class="inputField">
-            <%--@declare id="reputation"--%><label for="reputation" class="inputLabel">Reputation [stars]: </label>
-            <input id="reputation5" name="reputation" type="number" min="0" max="5" step="0.5" ></input>
-          </div>
       </fieldset>
 
       <div class="segment6">
