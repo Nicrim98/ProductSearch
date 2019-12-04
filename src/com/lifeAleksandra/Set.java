@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Set{
-    // DLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA OLIIIIIIIIIIIIIIIIIIIIIIIIIIIII <3
     // klasa która będzie zbierać zestawienia produktów
     // sets[0][] / sets[1][] / set[2][] <- set0 najlepszy itd.
 
@@ -36,6 +35,7 @@ public class Set{
     };
     */
 
+
     public FoundProduct[][] makeSets(Product[] p, int numberOfProducts) {
 
         WebCrawler web = new WebCrawler();
@@ -65,11 +65,10 @@ public class Set{
             sets[numberOfSets - 1][i] = options.get(4);     // ostatnine zestawienie
             shopIDs.add(options.get(4).shopId);
 
-            Compare compare = new Compare();
-            finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet1, priceSet2, priceSet3);
-
+           // Compare compare = new Compare();
+           // finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet1, priceSet2, priceSet3);
         }
-        return finalSet;
+        return sets;
     }
 
     public boolean isSetBetter(Set firstSet, Set secondSet) {

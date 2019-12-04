@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class WebCrawler {
 
-
     protected ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
     protected ArrayList<FoundProduct> finalAnswer = new ArrayList<FoundProduct>();
 
@@ -26,6 +25,7 @@ public class WebCrawler {
 
     //funkcja wyszukujaca produkt na stronie Skapiec
     public ArrayList<FoundProduct> Search(Product product, int time) throws IOException {
+        listOfProducts.clear();
 
         Connection connect = Jsoup.connect("https://www.skapiec.pl/szukaj/w_calym_serwisie/" + product.getName()); //pobranie zrodla strony
         Elements webSites; //strony 1,2,3..
@@ -74,15 +74,17 @@ public class WebCrawler {
         Sort sort = new Sort();
         sort.buble(listOfProducts);
 
-        //wybranie 5 najlepszych ofert
-        for(int i = 0; i<5;i++){
-            finalAnswer.add(listOfProducts.get(i));
-        }
-
-
-        return finalAnswer;
-
+//        //wybranie 5 najlepszych ofert
+//        for(int i = 0; i<5;i++){
+//            finalAnswer.add(listOfProducts.get(i));
+//        }
+//        if(listOfProducts.isEmpty()){
+//            Product product1 = new Product(product.name,product.amount,0,100000,product.reputation);
+//            Search(product1,1);
+//        }
+        return listOfProducts;
     }
+
 
     //funkcja przeszukujaca poszczegolne boxy z ogolnej strony Skapiec
     public void SearchBox(Element box, Product product) throws IOException {
@@ -172,7 +174,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("Mysz Logitech", 1, 34, 321, 4);
+            Product p = new Product("klawiatura", 1, 23, 500, 4);
             WebCrawler w = new WebCrawler();
             try {
                 w.Search(p,5);
@@ -180,11 +182,12 @@ public class WebCrawler {
                 e.printStackTrace();
             }
             Timestamp end = new Timestamp(System.currentTimeMillis());
-            System.out.println((end.getTime()-start.getTime())/1000);
-            for(int i=0; i<w.getFinalAnswer().size();i++){
-                System.out.println(w.getFinalAnswer().get(i).getFoundProductTotalPrice());
-                System.out.println(w.getFinalAnswer().get(i).getFoundProductName());
+            System.out.println("czas: "+(end.getTime()-start.getTime())/1000);
+            for(int i=0; i<w.getListOfProducts().size();i++){
+                System.out.println(w.getListOfProducts().get(i).getFoundProductTotalPrice());
+                System.out.println(w.getListOfProducts().get(i).getFoundProductName());
             }
-    }
+        }
+
     }
 
