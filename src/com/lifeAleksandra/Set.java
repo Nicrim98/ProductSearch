@@ -59,11 +59,13 @@ public class Set{
 
             }
         }
+        Compare compare = new Compare();
+        finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
+
             // TO DO:
             // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
-            // wywołanie metody compare
-            // przyporządkowanie wyników compare do finalSet i zrobienie return finalSet
-            return sets;
+
+            return finalSet;
     }
 
     public boolean isSetBetter(Set firstSet, Set secondSet) {

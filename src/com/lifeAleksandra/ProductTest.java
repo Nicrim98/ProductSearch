@@ -210,19 +210,19 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         }
         */
         System.out.println(finalSet[0][0].getFoundProductName() + " " + finalSet[0][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[0][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[0][2].getFoundProductTotalPrice());
+        System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
+        System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
-        System.out.println(finalSet[0][1].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
+        System.out.println(finalSet[0][1].getFoundProductName() + " " + finalSet[0][1].getFoundProductTotalPrice());
         System.out.println(finalSet[1][1].getFoundProductName() + " " + finalSet[1][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
+        System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
-        System.out.println(finalSet[0][2].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
+        System.out.println(finalSet[0][2].getFoundProductName() + " " + finalSet[0][2].getFoundProductTotalPrice());
+        System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
         System.out.println(finalSet[2][2].getFoundProductName() + " " + finalSet[2][2].getFoundProductTotalPrice());
     }
 }
