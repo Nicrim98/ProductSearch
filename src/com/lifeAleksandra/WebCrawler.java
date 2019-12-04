@@ -174,7 +174,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("klawiatura", 1, 23, 500, 4);
+            Product p = new Product("klawiatura", 1, 23, 500);
             WebCrawler w = new WebCrawler();
             try {
                 w.Search(p,5);

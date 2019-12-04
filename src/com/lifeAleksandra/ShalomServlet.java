@@ -22,7 +22,7 @@ public class ShalomServlet extends HttpServlet {
     public static String reputation;
     protected int counter = 0;
     protected final int zestawienia = 3;
-    protected int zestawienia_cut = 0;
+    protected int zestawienia_cut = 3;  // domyślnie 3 zestawień są wyświetlane, ale w razie braku opcji dla produktów, zestawienie jest ucinane
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)    throws ServletException, IOException {
@@ -64,6 +64,7 @@ public class ShalomServlet extends HttpServlet {
         String destination = "output.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
 
+        // Zapewnienie wyświetlania tylko zestawień, gdzie wszystkie produkty mają swoje warianty cenowe ;)
         for(int i=0; i < counter; i++){
             for(int j= 0; j < 5; j++) {
                 if (readySets[i][j] == null) {
@@ -78,7 +79,7 @@ public class ShalomServlet extends HttpServlet {
 
         for(int i=0; i < counter; i++) {
             float[] totalPriceTmp = new float[3];
-            for(int j=0; j < zestawienia; j++) {
+            for(int j=0; j < zestawienia_cut; j++) {
                 if(readySets[i][j] != null){
 
                     String productNameTmp = "productName"+i+"_"+j;      // tworzenie odpowiednich zmiennych html

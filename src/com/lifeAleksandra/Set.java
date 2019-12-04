@@ -50,6 +50,7 @@ public class Set{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            // przyporządkowanie produktów znalezionych przez crawlera do zestawień
             for (int j = 0; j < options.size() && j < 5; j++) {
 
                     sets[i][numberOfSets - (5 - j)] = options.get(j);
@@ -58,31 +59,10 @@ public class Set{
 
             }
         }
-        /*        sets[i][numberOfSets - 4] = options.get(1);
-                shopIDs.add(options.get(1).shopId);
-                priceSet2 += options.get(1).getFoundProductTotalPrice();
-            }
-            if(options.get(2) != null) {
-                sets[i][numberOfSets - 3] = options.get(2);     // Najlepsze zestawienie czytaj najtańsze (webcrawler zwraca posortowane od najtańszego)
-                shopIDs.add(options.get(2).shopId);
-                priceSet3 += options.get(2).getFoundProductTotalPrice();
-            }
-            if(options.get(3) != null) {
-                sets[i][numberOfSets - 2] = options.get(3);     // 2 najlepsze zestawienie
-                shopIDs.add(options.get(3).shopId);
-            }
-            if(options.get(4) != null) {
-                sets[i][numberOfSets - 1] = options.get(4);     // ostatnine zestawienie
-                shopIDs.add(options.get(4).shopId);
-            }
-
-            //Compare compare = new Compare();
-            //finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet1, priceSet2, priceSet3);
-
-        }
-
-         */
-            // return finalSet;
+            // TO DO:
+            // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
+            // wywołanie metody compare
+            // przyporządkowanie wyników compare do finalSet i zrobienie return finalSet
             return sets;
     }
 
