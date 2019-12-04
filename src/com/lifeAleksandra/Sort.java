@@ -105,4 +105,45 @@ public class Sort {
             }
         }
     }
+
+    public static void merge1(Set[] a, Set[] l, Set[] r, int left, int right) {
+        int i = 0, j = 0, k = 0;
+
+        while (i < left && j < right) {
+            if (l[i].isSetBetter(l[i], r[i])) { // l <= r
+                a[k++] = l[i++];
+            } else {
+                a[k++] = r[j++];
+            }
+        }
+        while (i < left) {
+            a[k++] = l[i++];
+        }
+        while (j < right) {
+            a[k++] = r[j++];
+        }
+    }
+
+    public  void mergeSort1(Set[] a, int ammount) {
+        if (ammount < 2) {
+            return;
+        }
+        int mid = ammount / 2;
+        Set[] l = new Set[mid];
+        Set[] r = new Set[ammount - mid];
+
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < ammount; i++) {
+            r[i - mid] = a[i];
+        }
+        mergeSort1(l, mid);
+        mergeSort1(r, ammount - mid);
+
+        merge1(a, l, r, mid, ammount - mid);
+    }
+
+
+
 }
