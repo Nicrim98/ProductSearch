@@ -76,30 +76,31 @@ public class ShalomServlet extends HttpServlet {
         }
 
         System.out.println(zestawienia_cut + "max zestawien");
+        float[] totalPriceTmp = new float[3];
 
-        for(int i=0; i < counter; i++) {
-            float[] totalPriceTmp = new float[3];
+        for(int i=0; i < counter; i++) {    // liczba produktów
             for(int j=0; j < zestawienia_cut; j++) {
-                if(readySets[i][j] != null){
 
+                if(readySets[i][j] != null){
                     String productNameTmp = "productName"+i+"_"+j;      // tworzenie odpowiednich zmiennych html
                     String priceTmp = "price"+i+"_"+j;
                     String urlTmp = "url"+i+"_"+j;
-                    String setPrice = "setPrice"+j;
 
                     request.setAttribute(productNameTmp, readySets[i][j].foundProductName);
                     request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice);
                     request.setAttribute(urlTmp, readySets[i][j].url);
-                    totalPriceTmp[j] += readySets[i][j].foundProductTotalPrice;
-
-                    if(i+1==counter){   // koniec produktów w danym zestawienie to wypisujemy cene za całość
-                        request.setAttribute(setPrice, totalPriceTmp[j]);
-                    }
+                    totalPriceTmp[j] = totalPriceTmp[j] + readySets[i][j].foundProductTotalPrice;
                 }
+
             }
         }
-        // NAPRAWA
-        requestDispatcher.forward(request, response);   // wyświetlanie
+
+        for(int i=0; i<zestawienia_cut; i++) {  // ustawienie pola ceny za zestaw
+            String setPrice = "setPrice"+i;
+            request.setAttribute(setPrice, totalPriceTmp[i]);
+        }
+
+        requestDispatcher.forward(request, response);   // wyświetlanie wyników
 
     }
 }

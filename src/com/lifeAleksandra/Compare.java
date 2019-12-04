@@ -23,10 +23,11 @@ public class Compare{
 
         // stworzenie tych zesatawień z tańszą dosatwą i porównanie z domyślnie najtańszymi zestawami XD
         //FoundProduct[][] tmp = new FoundProduct[duplicateShopIDs.size()][numberOfProducts];
-        FoundProduct[][] tmp = new FoundProduct[numberOfProducts][duplicateShopIDs.size()];
+        FoundProduct[][] tmp = new FoundProduct[1000][duplicateShopIDs.size()];
         Set[] set_tmp = new Set[duplicateShopIDs.size()];
         // zastanowić się nad braniem odpowiednich produktów z zestawień do porównań shopID
 
+        // TU JEST PROBLEM WIELKI I OGROMNY
         for(int IDs : duplicateShopIDs) {    // dla każdego zduplikowanego shopid szukamy powiązanych produktówz danym jednym sklepie
             float maxDeliveryPrice = 0;
             float totalPricePromisingSet = 0;
@@ -60,6 +61,8 @@ public class Compare{
                     if ((i + 1) == numberOfProducts && (j + 1) == numberOfSets) { // znalezione wszystkie powiązane produkty z danym sklepem to zliczamy cenę za zestaw
                         System.out.println(" Zakończyłem zestaw potencjalnie lepszy, o to i on...");
                         totalPricePromisingSet = totalPricePromisingSet + maxDeliveryPrice;
+                        System.out.println(duplicateShopIDs.size() + " O to mój size");
+                        System.out.println(" HEJKA... " + counter);
                         set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
                     }
                 }
@@ -67,6 +70,7 @@ public class Compare{
             counter = counter + 1;
         }
 
+        System.out.println("marcin");
         Sort.buble(set_tmp, counter); // pytanie czy to działa XD
 
         for(int i=0; i < counter; i++){

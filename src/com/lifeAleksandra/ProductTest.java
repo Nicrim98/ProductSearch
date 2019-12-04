@@ -13,8 +13,8 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
 
         FoundProduct f11 = new FoundProduct("Myszka1 Logitech", 100, 10, 4, 100);
         a.add(100);
-        FoundProduct f12 = new FoundProduct("Myszka2 Logitech", 200, 10, 4, 101);
-        a.add(101);
+        FoundProduct f12 = new FoundProduct("Myszka2 Logitech", 110, 10, 4, 100);
+        a.add(100);
         FoundProduct f13 = new FoundProduct("Myszka3 Logitech", 210, 20, 4, 102);
         a.add(102);
         FoundProduct f14 = new FoundProduct("Myszka4 Logitech", 211, 15, 4, 201);
@@ -63,14 +63,14 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         def[3][2] = f34;
         def[4][2] = f35;
 
-        FoundProduct[][] defs = new FoundProduct[3][5];
+        FoundProduct[][] defs = new FoundProduct[1][5];
         defs[0][0] = f11;
         defs[0][1] = f12;
         defs[0][2] = f13;
         defs[0][3] = f14;
         defs[0][4] = f15;
 
-        defs[1][0] = f21;
+        /*defs[1][0] = f21;
         defs[1][1] = f22;
         defs[1][2] = f23;
         defs[1][3] = f24;
@@ -81,16 +81,16 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         defs[2][2] = f33;
         defs[2][3] = f34;
         defs[2][4] = f35;
-
-        int priceSet1 = 1133;
-        int priceSet2 = 1332;
-        int priceSet3 = 1453;
+        */
+        int priceSet1 = 110;
+        int priceSet2 = 210;
+        int priceSet3 = 230;
 
         //check(FoundProduct[][] defaultSet, int numberOfProducts, ArrayList<Integer> shopIDs, float priceSet1, float priceSet2, float priceSet3) {
         FoundProduct[][] finalSet = new FoundProduct[3][3];
 
         Compare cos = new Compare();
-        finalSet = cos.check(defs, 3, a, priceSet1, priceSet2, priceSet3);
+        finalSet = cos.check(defs, 1, a, priceSet1, priceSet2, priceSet3);
         // wywołana funkcja czek i na dole jest jeszcze wypisanie, albo można sobie to zakompentować 'Compare' i lecieć po kolei wywołaniami pod spodem ;)
 
 
@@ -210,19 +210,19 @@ public class ProductTest{   // klasa do przetestowania i pokazania działania ja
         }
         */
         System.out.println(finalSet[0][0].getFoundProductName() + " " + finalSet[0][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
+        //System.out.println(finalSet[1][0].getFoundProductName() + " " + finalSet[1][0].getFoundProductTotalPrice());
+        //System.out.println(finalSet[2][0].getFoundProductName() + " " + finalSet[2][0].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
         System.out.println(finalSet[0][1].getFoundProductName() + " " + finalSet[0][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][1].getFoundProductName() + " " + finalSet[1][1].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
+        //System.out.println(finalSet[1][1].getFoundProductName() + " " + finalSet[1][1].getFoundProductTotalPrice());
+        //System.out.println(finalSet[2][1].getFoundProductName() + " " + finalSet[2][1].getFoundProductTotalPrice());
 
         System.out.println(" ");
 
         System.out.println(finalSet[0][2].getFoundProductName() + " " + finalSet[0][2].getFoundProductTotalPrice());
-        System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
-        System.out.println(finalSet[2][2].getFoundProductName() + " " + finalSet[2][2].getFoundProductTotalPrice());
+        //System.out.println(finalSet[1][2].getFoundProductName() + " " + finalSet[1][2].getFoundProductTotalPrice());
+        //System.out.println(finalSet[2][2].getFoundProductName() + " " + finalSet[2][2].getFoundProductTotalPrice());
     }
 }
