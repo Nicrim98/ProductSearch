@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col" >
             <form name="ShalomServlet" method="get" action="parameters">
-                <div class="card" style="width: 25rem;">
+                <div class="card bg-secondary" style="width: 25rem;">
                     <ul class="list-group list-group-flush" id="myForm">
                         <li class="list-group-item">
                             <div class="form-group">

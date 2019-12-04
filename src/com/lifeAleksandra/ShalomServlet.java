@@ -59,7 +59,6 @@ public class ShalomServlet extends HttpServlet {
 
         Set s = new Set();
         FoundProduct[][] readySets = s.makeSets(pr, counter);
-        System.out.println("naprawa gita");
 
         //show search result, open existing .jsp file
         String destination = "output.jsp";
