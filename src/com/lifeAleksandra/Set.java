@@ -53,9 +53,10 @@ public class Set{
             // przyporządkowanie produktów znalezionych przez crawlera do zestawień
             for (int j = 0; j < options.size() && j < 5; j++) {
 
-                    sets[i][numberOfSets - (5 - j)] = options.get(j);
-                    shopIDs.add(options.get(j).shopId);
-                    priceSet[i] += options.get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
+                sets[i][numberOfSets - (5 - j)] = options.get(j);
+                shopIDs.add(options.get(j).shopId);
+                System.out.println(" ELLO MELLO " + priceSet[i]);
+                priceSet[j] += options.get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
 
             }
         }
@@ -65,6 +66,7 @@ public class Set{
             // TO DO:
             // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
 
+            //return sets;
             return finalSet;
     }
 

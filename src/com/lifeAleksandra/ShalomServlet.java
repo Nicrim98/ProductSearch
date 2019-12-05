@@ -65,10 +65,13 @@ public class ShalomServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
 
         // Zapewnienie wyświetlania tylko zestawień, gdzie wszystkie produkty mają swoje warianty cenowe ;)
+        System.out.println(counter + " ile produktów użytkownika zliczyłem");
+        System.out.println(zestawienia_cut + " ile zestawień wyświetle");
+        zestawienia_cut = 3;
         for(int i=0; i < counter; i++){
-            for(int j= 0; j < 5; j++) {
+            for(int j=0; j < 5; j++) {
                 if (readySets[i][j] == null) {
-                    if (j <= zestawienia_cut) {
+                    if ( j < zestawienia_cut) {
                         zestawienia_cut = j;
                     }
                 }

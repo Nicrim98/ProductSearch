@@ -88,7 +88,7 @@ public class Sort {
     }
 
 
-    public static void buble(Set[] a, int ammount) {
+    public static void bublle(Set[] a, int ammount) {
         int change = 1;
         Set temporarySet;
         while (change > 0) {

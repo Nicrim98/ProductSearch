@@ -27,8 +27,7 @@ public class Compare{
         Set[] set_tmp = new Set[duplicateShopIDs.size()];
         // zastanowić się nad braniem odpowiednich produktów z zestawień do porównań shopID
 
-        // TU JEST PROBLEM WIELKI I OGROMNY
-        for(int IDs : duplicateShopIDs) {    // dla każdego zduplikowanego shopid szukamy powiązanych produktówz danym jednym sklepie
+        for (int IDs : duplicateShopIDs) {    // dla każdego zduplikowanego shopid szukamy powiązanych produktówz danym jednym sklepie
             float maxDeliveryPrice = 0;
             float totalPricePromisingSet = 0;
             boolean foundIDInProducts = false;
@@ -40,7 +39,7 @@ public class Compare{
                     if (defaultSet[i][j] != null) {
                         System.out.println(defaultSet[i][j].shopId == IDs);
 
-                        if (defaultSet[i][j].shopId == IDs) {
+                        if (defaultSet[i][j].shopId == IDs && !foundIDInProducts) {
                             if (defaultSet[i][j].getFoundDeliveryPrice() > maxDeliveryPrice) {
                                 maxDeliveryPrice = defaultSet[i][j].getFoundDeliveryPrice();
                                 defaultSet[i][j].setFoundDeliveryPrice(0);
@@ -59,52 +58,84 @@ public class Compare{
 
 
                     if ((i + 1) == numberOfProducts && (j + 1) == numberOfSets) { // znalezione wszystkie powiązane produkty z danym sklepem to zliczamy cenę za zestaw
-                        System.out.println(" Zakończyłem zestaw potencjalnie lepszy, o to i on...");
-                        totalPricePromisingSet = totalPricePromisingSet + maxDeliveryPrice;
-                        System.out.println(duplicateShopIDs.size() + " O to mój size");
-                        System.out.println(" HEJKA... " + counter);
-                        set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
+                        // trzeba by sprawdzić czy dane shopID występuje w jakimś innym produkcie
+                        int idCounter = 0;
+
+                        for(int k=0; k<numberOfProducts;k++){
+                            if(tmp[k][counter] != null) {
+                                if (tmp[k][counter].getShopId() == IDs) {
+                                    idCounter++;
+                                }
+                            }
+                        }
+
+                        if(idCounter > 1) {
+                            System.out.println(" Zakończyłem zestaw potencjalnie lepszy, o to i on...");
+                            totalPricePromisingSet = totalPricePromisingSet + maxDeliveryPrice;
+                            System.out.println(" Cena promising set = " + totalPricePromisingSet);
+                            System.out.println(duplicateShopIDs.size() + " O to mój size");
+                            System.out.println(" HEJKA... " + counter);
+                            set_tmp[counter] = new Set(tmp[counter], totalPricePromisingSet);
+                            counter = counter + 1;
+                        }
                     }
                 }
             }
-            counter = counter + 1;
+
         }
 
         System.out.println("marcin");
-        Sort.buble(set_tmp, counter); // pytanie czy to działa XD
+       // Sort.bublle(set_tmp, counter); // pytanie czy to działa XD // NIE DZIALA :P
 
-        for(int i=0; i < counter; i++){
-            if(counter < 3) {
+        for(int i=0; i < duplicateShopIDs.size(); i++){
                 if (set_tmp[i] != null) {
 
                     boolean change = false;
+                    System.out.println(" Cena do porownan..." + set_tmp[i].priceForSet);
 
-                    if (set_tmp[i].priceForSet <= priceSet1) {
+                    if (set_tmp[i].priceForSet < priceSet1) {
                         for(int j=0; j < numberOfProducts; j++) {
+                            System.out.println(" siema");
+                            System.out.println(" porownuje z... " + priceSet1);
                             finalSet[j][2] = finalSet[i][1];
                             finalSet[j][1] = finalSet[i][0];
                             finalSet[j][0] = tmp[j][i];
                         }
+                        priceSet3 = priceSet2;
+                        priceSet2 = priceSet1;
+                        priceSet1 = set_tmp[i].priceForSet; // update ceny pierwszeego zestawu
                         change = true;
                     }
 
-                    if (set_tmp[i].priceForSet <= priceSet2 && !change) {
+                    if (set_tmp[i].priceForSet < priceSet2 && !change && set_tmp[i].priceForSet != priceSet1) {
+                        System.out.println(set_tmp[i].priceForSet + "WHY ?!");
+                        System.out.println(" XDDDD");
+                        System.out.println(" porownuje z... " + priceSet2);
                         for(int j=0; j < numberOfProducts; j++) {
                             finalSet[j][2] =finalSet[j][1];
+                            System.out.println(finalSet[j][2].getFoundProductPrice() + "jej");
+                            System.out.println(tmp[j][1].getFoundProductPrice() + "ejej");
                             finalSet[j][1] = tmp[j][i]; // It finally works :P
                         }
+                        priceSet3 = priceSet2;
+                        priceSet2 = set_tmp[i].priceForSet; // update ceny drugiego zestawu
                         change = true;
                     }
 
-                    if (set_tmp[i].priceForSet <= priceSet3 && !change) {
+                    if (set_tmp[i].priceForSet < priceSet3 && !change && set_tmp[i].priceForSet != priceSet1 && set_tmp[i].priceForSet != priceSet2) {
+                        System.out.println("YOLO");
+                        System.out.println(" porownuje z... " + priceSet3);
                         for(int j=0; j < numberOfProducts; j++) {
-                            finalSet[j][2] = tmp[j][i];
+                            finalSet[j][2] = tmp[j][i]; // nie nastepuje podmiana nie wiedziec czemu XD
+                            System.out.println(finalSet[j][2].getFoundProductName() + "jej");
+                            System.out.println(tmp[j][i].getFoundProductName() + "ejej");
                         }
+                        priceSet3 = set_tmp[i].priceForSet; // pdate ceny rzeciego zestawu
                     }
 
                 }
-            }
         }
+        System.out.println(" Moje pricy..." + " " + priceSet1 + " " + priceSet2 + " " + priceSet3);
 
         return finalSet;
     }

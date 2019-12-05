@@ -174,8 +174,9 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("klawiatura", 1, 23, 500);
+            Product p = new Product("garmin 735", 1, 500, 2000);
             WebCrawler w = new WebCrawler();
+
             try {
                 w.Search(p,5);
             } catch (IOException e) {
