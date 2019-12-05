@@ -38,36 +38,47 @@ public class Set{
     public FoundProduct[][] makeSets(Product[] p, int numberOfProducts) {
 
         WebCrawler web = new WebCrawler();
-        ArrayList<FoundProduct> options = new ArrayList<FoundProduct>(5);   // 5 najlepszych opcji dostajemy od webcrawlera
+        final ArrayList<FoundProduct>[] options = new ArrayList[]{new ArrayList<FoundProduct>(5)};   // 5 najlepszych opcji dostajemy od webcrawlera
         FoundProduct[][] sets = new FoundProduct[numberOfProducts][5];  // wybiermay 3 zestawy z wyszukiwanych produktów
         FoundProduct[][] finalSet = new FoundProduct[numberOfProducts][3];
-
+        ArrayList<Thread> threads = new ArrayList<Thread>();
         // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
         for (int i = 0; i < numberOfProducts; i++) {
 
-            try {
-                options = web.Search(p[i], 5);     // load best 3 options for the product[number of product]
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            // przyporządkowanie produktów znalezionych przez crawlera do zestawień
-            for (int j = 0; j < options.size() && j < 5; j++) {
-
-                sets[i][numberOfSets - (5 - j)] = options.get(j);
-                shopIDs.add(options.get(j).shopId);
-                System.out.println(" ELLO MELLO " + priceSet[i]);
-                priceSet[j] += options.get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
-
-            }
+            //ArrayList<Thread> threads = new ArrayList<Thread>();
+            int finalI = i;//$$$
+            threads.add(new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        options[0] = web.Search(p[finalI], 5);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }));
         }
-        Compare compare = new Compare();
-        finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
+        for (Thread t : threads) {
+            t.run();
+        }
+        for (int i = 0; i < numberOfProducts; i++) {
+                // przyporządkowanie produktów znalezionych przez crawlera do zestawień
+                for (int j = 0; j < options.length && j < 5; j++) {
+
+                    sets[i][numberOfSets - (5 - j)] = options[i].get(j);
+                    shopIDs.add(options[i].get(j).shopId);
+                    priceSet[i] += options[i].get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
+
+                }
+
+        }
+//        Compare compare = new Compare();
+//        finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
 
             // TO DO:
             // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
 
-            //return sets;
-            return finalSet;
+            return sets;
     }
 
     public boolean isSetBetter(Set firstSet, Set secondSet) {
