@@ -38,47 +38,66 @@ public class Set{
     public FoundProduct[][] makeSets(Product[] p, int numberOfProducts) {
 
         WebCrawler web = new WebCrawler();
-        final ArrayList<FoundProduct>[] options = new ArrayList[]{new ArrayList<FoundProduct>(5)};   // 5 najlepszych opcji dostajemy od webcrawlera
+       // final ArrayList<FoundProduct>[] options = new ArrayList[]{new ArrayList<FoundProduct>(5)};   // 5 najlepszych opcji dostajemy od webcrawlera
+        ArrayList<FoundProduct> options = new ArrayList (new ArrayList<FoundProduct>(5));   // 5 najlepszych opcji dostajemy od webcrawlera
         FoundProduct[][] sets = new FoundProduct[numberOfProducts][5];  // wybiermay 3 zestawy z wyszukiwanych produktów
         FoundProduct[][] finalSet = new FoundProduct[numberOfProducts][3];
-        ArrayList<Thread> threads = new ArrayList<Thread>();
-        // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
+//        ArrayList<Thread> threads = new ArrayList<Thread>();
+//        // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
+//        for (int i = 0; i < numberOfProducts; i++) {
+//
+//            //ArrayList<Thread> threads = new ArrayList<Thread>();
+//            final int[] finalI = {i};//$$$
+//            threads.add(new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        options[0] = web.Search(p[finalI[0]], 5);
+//
+//
+//                        for (int j = 0; j < options.length && j < 5; j++) {
+//
+//                            sets[finalI[0]][numberOfSets - (5 - j)] = options[0].get(j);
+//                            shopIDs.add(options[0].get(j).shopId);
+//                            priceSet[finalI[0]] += options[0].get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
+//                        }
+//                        finalI[0]++;
+//
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }));
+//        }
+//        for (Thread t : threads) {
+//            t.run();
+//        }
         for (int i = 0; i < numberOfProducts; i++) {
 
-            //ArrayList<Thread> threads = new ArrayList<Thread>();
-            int finalI = i;//$$$
-            threads.add(new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        options[0] = web.Search(p[finalI], 5);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
+            try {
+                options = web.Search(p[i], 5);     // load best 3 options for the product[number of product]
+            } catch ( IOException e) {
+                e.printStackTrace();
+            }
+            // przyporządkowanie produktów znalezionych przez crawlera do zestawień
+            for (int j = 0; j < options.size() && j < 5; j++) {
+
+                sets[i][numberOfSets - (5 - j)] = options.get(j);
+                shopIDs.add(options.get(j).shopId);
+                //System.out.println(" ELLO MELLO " + priceSet[i]);
+                priceSet[j] += options.get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
+
+            }
         }
-        for (Thread t : threads) {
-            t.run();
-        }
-        for (int i = 0; i < numberOfProducts; i++) {
-                // przyporządkowanie produktów znalezionych przez crawlera do zestawień
-                for (int j = 0; j < options.length && j < 5; j++) {
+        Compare compare = new Compare();
+        finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
 
-                    sets[i][numberOfSets - (5 - j)] = options[i].get(j);
-                    shopIDs.add(options[i].get(j).shopId);
-                    priceSet[i] += options[i].get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
+        // TO DO:
+        // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
 
-                }
-
-        }
-//        Compare compare = new Compare();
-//        finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
-
-            // TO DO:
-            // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
-
-            return sets;
+        //return sets;
+        return finalSet;
     }
 
     public boolean isSetBetter(Set firstSet, Set secondSet) {
