@@ -6,7 +6,7 @@ header{
     color: #BF0000;
 }
 body{
-    background-image: url("janusz.jpg");
+    background-image: url("deski.jpg");
 }
 form{
     display: grid;
@@ -24,6 +24,9 @@ form{
 }
 fieldset{
     background-color: #D4D4D4;
+}
+legend{
+    color: #BF0000;
 }
 
 #submitBtn{

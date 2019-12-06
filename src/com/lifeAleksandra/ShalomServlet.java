@@ -82,6 +82,12 @@ public class ShalomServlet extends HttpServlet {
 
         System.out.println(zestawienia_cut + "max zestawien");
         float[] totalPriceTmp = new float[3];
+        for(int i=0; i<5;i++){
+            for(int j=0; j<3;j++) {
+                String hid = "hid" + i + "_" + j;
+                request.setAttribute(hid, "hidden");
+            }
+        }
 
         for(int i=0; i < counter; i++) {    // liczba produktów
             for(int j=0; j < zestawienia_cut; j++) {
@@ -90,12 +96,13 @@ public class ShalomServlet extends HttpServlet {
                     String productNameTmp = "productName"+i+"_"+j;      // tworzenie odpowiednich zmiennych html
                     String priceTmp = "price"+i+"_"+j;
                     String urlTmp = "url"+i+"_"+j;
+                    String hid = "hid"+i+"_"+j;
 
                     request.setAttribute(productNameTmp, readySets[i][j].foundProductName);
-                    request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice); //foundProductTotalPrice
+                    request.setAttribute(priceTmp, readySets[i][j].foundProductPrice); //foundProductTotalPrice
                     request.setAttribute(urlTmp, readySets[i][j].url);
+                    request.setAttribute(hid, "visible");
                     totalPriceTmp[j] = totalPriceTmp[j] + readySets[i][j].foundProductPrice*(pr[i].amount-1)+readySets[i][j].foundProductTotalPrice;
-
                 }
             }
         }

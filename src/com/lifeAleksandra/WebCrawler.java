@@ -10,14 +10,10 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class WebCrawler {
+public class WebCrawler{
 
     protected ArrayList<FoundProduct> listOfProducts = new ArrayList<FoundProduct>();
-    protected ArrayList<FoundProduct> finalAnswer = new ArrayList<FoundProduct>();
 
-    public ArrayList<FoundProduct> getFinalAnswer() {
-        return finalAnswer;
-    }
 
     public ArrayList<FoundProduct> getListOfProducts() {
         return listOfProducts;
@@ -78,10 +74,11 @@ public class WebCrawler {
 //        for(int i = 0; i<5;i++){
 //            finalAnswer.add(listOfProducts.get(i));
 //        }
-//        if(listOfProducts.isEmpty()){
-//            Product product1 = new Product(product.name,product.amount,0,100000,product.reputation);
-//            Search(product1,1);
-//        }
+        if(listOfProducts.isEmpty()){
+            listOfProducts.add(new FoundProduct("NO MATCHES FOR "+product.getName(), 0, 0, 0, "https://piv.pivpiv.dk"));
+            listOfProducts.add(new FoundProduct("NO MATCHES FOR "+product.getName(), 0, 0, 0, "https://piv.pivpiv.dk"));
+            listOfProducts.add(new FoundProduct("NO MATCHES FOR "+product.getName(), 0, 0, 0, "https://piv.pivpiv.dk"));
+        }
         return listOfProducts;
     }
 
@@ -174,7 +171,7 @@ public class WebCrawler {
         public static void main (String[]args){
 
             Timestamp start = new Timestamp(System.currentTimeMillis());
-            Product p = new Product("garmin 735", 1, 500, 2000);
+            Product p = new Product("mysz logitech g502", 1, 50, 2000);
             WebCrawler w = new WebCrawler();
 
             try {
@@ -190,5 +187,11 @@ public class WebCrawler {
             }
         }
 
-    }
+//    @Override
+//    public void run() {
+//        Product p =
+//        Search(,5)
+//
+//    }
+}
 

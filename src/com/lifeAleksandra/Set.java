@@ -3,8 +3,7 @@ package com.lifeAleksandra;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Set{
-    // DLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA OLIIIIIIIIIIIIIIIIIIIIIIIIIIIII <3
+public class Set extends Thread{
     // klasa która będzie zbierać zestawienia produktów
     // sets[0][] / sets[1][] / set[2][] <- set0 najlepszy itd.
 
@@ -15,69 +14,34 @@ public class Set{
     protected final int numberOfSets = 5;
     protected float priceForSet;
     protected float[] priceSet= new float[5];
-
-
     protected ArrayList<Integer> shopIDs = new ArrayList<>();
 
-    public Set() {
-    }
 
     public Set(FoundProduct[] f, float priceForSet) {
         this.priceForSet = priceForSet;
     }
 
-   /* public void run(WebCrawler web, Product p, FoundProduct[] options) {
-        try {
-            options = web.Search(p, 5);     // load best 3 options for the product[number of product]
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    };
-    */
+    public Set() {
+    }
+
+
 
     public FoundProduct[][] makeSets(Product[] p, int numberOfProducts) {
 
         WebCrawler web = new WebCrawler();
-       // final ArrayList<FoundProduct>[] options = new ArrayList[]{new ArrayList<FoundProduct>(5)};   // 5 najlepszych opcji dostajemy od webcrawlera
-        ArrayList<FoundProduct> options = new ArrayList (new ArrayList<FoundProduct>(5));   // 5 najlepszych opcji dostajemy od webcrawlera
+        ArrayList<FoundProduct> options = new ArrayList (new ArrayList(new ArrayList<FoundProduct>(5)));   // 5 najlepszych opcji dostajemy od webcrawlera
         FoundProduct[][] sets = new FoundProduct[numberOfProducts][5];  // wybiermay 3 zestawy z wyszukiwanych produktów
+
         FoundProduct[][] finalSet = new FoundProduct[numberOfProducts][3];
-//        ArrayList<Thread> threads = new ArrayList<Thread>();
-//        // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
-//        for (int i = 0; i < numberOfProducts; i++) {
-//
-//            //ArrayList<Thread> threads = new ArrayList<Thread>();
-//            final int[] finalI = {i};//$$$
-//            threads.add(new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        options[0] = web.Search(p[finalI[0]], 5);
-//
-//
-//                        for (int j = 0; j < options.length && j < 5; j++) {
-//
-//                            sets[finalI[0]][numberOfSets - (5 - j)] = options[0].get(j);
-//                            shopIDs.add(options[0].get(j).shopId);
-//                            priceSet[finalI[0]] += options[0].get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
-//                        }
-//                        finalI[0]++;
-//
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }));
-//        }
-//        for (Thread t : threads) {
-//            t.run();
-//        }
+
+        // tworzenie zestawiń (domyślnie najlepszych bez patrzenia czy produkty z tego samego sklepu)
+
+
         for (int i = 0; i < numberOfProducts; i++) {
 
             try {
                 options = web.Search(p[i], 5);     // load best 3 options for the product[number of product]
-            } catch ( IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             // przyporządkowanie produktów znalezionych przez crawlera do zestawień
@@ -108,4 +72,5 @@ public class Set{
             return false;
         }
     }
+
 }

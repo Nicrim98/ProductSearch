@@ -10,6 +10,7 @@
   <head>
     <title>Form</title>
     <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
 
@@ -21,7 +22,7 @@
       <form name="ShalomServlet" method="post" action="parameters" >
         <%-- zamienienie metody na post zamiast get, i w action zamienienie całego url --%>
       <fieldset class="segment1">
-        <legend>Product I:</legend>
+        <legend class="legend">Product I:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
             <input id="name1" name="productName" type="text" value="" required></input>
@@ -46,7 +47,7 @@
       </fieldset>
 
       <fieldset class="segment2">
-        <legend>Product II:</legend>
+        <legend class="legend">Product II:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
             <input id="name2" name="productName" type="text" value=""></input>
@@ -70,7 +71,7 @@
       </fieldset>
 
       <fieldset class = "segment3">
-        <legend>Product III:</legend>
+        <legend class="legend">Product III:</legend>
           <div class="inputField">
             <%--@declare id="productname"--%><label for="productName" class="inputLabel">Product's name: </label>
             <input id="name3" name="productName" type="text" value=""></input>

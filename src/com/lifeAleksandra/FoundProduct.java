@@ -17,8 +17,10 @@ public class FoundProduct{
         this.foundReputation = foundReputation;
         foundProductTotalPrice = foundProductPrice + foundDeliveryPrice;
         this.url = url;
-        String[] id =url.split("/");
-        shopId = Integer.parseInt(id[5]);
+        if(url != "https://piv.pivpiv.dk") {
+            String[] id = url.split("/");
+            shopId = Integer.parseInt(id[5]);
+        }
 
     }
 

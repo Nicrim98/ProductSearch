@@ -53,5 +53,6 @@ public class Product {
         this.amount = amount;
         this.min_price = min_price;
         this.max_price = max_price;
+        this.reputation = 4;
     }
 }
