@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 
 @WebServlet("/parameters")
@@ -35,6 +36,7 @@ public class ShalomServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)	throws ServletException, IOException {
 
+        Timestamp start = new Timestamp(System.currentTimeMillis());
         // Processing the form
         PrintWriter writer = response.getWriter();
 
@@ -90,11 +92,11 @@ public class ShalomServlet extends HttpServlet {
                     String urlTmp = "url"+i+"_"+j;
 
                     request.setAttribute(productNameTmp, readySets[i][j].foundProductName);
-                    request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice);
+                    request.setAttribute(priceTmp, readySets[i][j].foundProductTotalPrice); //foundProductTotalPrice
                     request.setAttribute(urlTmp, readySets[i][j].url);
-                    totalPriceTmp[j] = totalPriceTmp[j] + readySets[i][j].foundProductTotalPrice;
-                }
+                    totalPriceTmp[j] = totalPriceTmp[j] + readySets[i][j].foundProductPrice*(pr[i].amount-1)+readySets[i][j].foundProductTotalPrice;
 
+                }
             }
         }
 
@@ -104,6 +106,8 @@ public class ShalomServlet extends HttpServlet {
         }
 
         requestDispatcher.forward(request, response);   // wyświetlanie wyników
+        Timestamp end = new Timestamp(System.currentTimeMillis());
+        System.out.println("czas: "+(end.getTime()-start.getTime())/1000);
 
     }
 }
