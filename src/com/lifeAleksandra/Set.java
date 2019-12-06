@@ -6,10 +6,8 @@ import java.util.ArrayList;
 public class Set extends Thread{
     // klasa która będzie zbierać zestawienia produktów
     // sets[0][] / sets[1][] / set[2][] <- set0 najlepszy itd.
-
     // utworzenie tych defaultowych setsów pomoże moim zdaniem do łatwiejszego wyświetlania
     // wyświetlania lepszego, bo nie będziemy brać wszystkich kolejnych produktów tylko jeden produkt będzie się różnił ceną
-
     // następnie w klasie Compare zamierzam patrzeć na id_sklepu i sprawdzać wtedy jeszcze tą dostawę w przypadku tego samego sklepu
     protected final int numberOfSets = 5;
     protected float priceForSet;
@@ -49,7 +47,7 @@ public class Set extends Thread{
 
                 sets[i][numberOfSets - (5 - j)] = options.get(j);
                 shopIDs.add(options.get(j).shopId);
-                //System.out.println(" ELLO MELLO " + priceSet[i]);
+
                 priceSet[j] += options.get(j).getFoundProductTotalPrice();    // zliczanie ceny za zestaw, tylko dla trzech pierwszych, bo tylko 3 zestawienia końcow
 
             }
@@ -57,20 +55,8 @@ public class Set extends Thread{
         Compare compare = new Compare();
         finalSet = compare.check(sets, numberOfProducts, shopIDs, priceSet[0], priceSet[1], priceSet[2]);
 
-        // TO DO:
-        // załatwienie case'a, że jeśli nie mamy jakiejś opcji produktu, ale mamy jakieś w ogóle to zwróć w to miejsce najlepszą opcje dla tego produktu
-
-        //return sets;
         return finalSet;
     }
 
-    public boolean isSetBetter(Set firstSet, Set secondSet) {
-
-        if (firstSet.priceForSet < secondSet.priceForSet) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }

@@ -16,13 +16,8 @@ import java.sql.Timestamp;
 public class ShalomServlet extends HttpServlet {
 
 
-    protected String productName;
-    protected int amount;
-    public static String minPrice;
-    public static String maxPrice;
-    public static String reputation;
+
     protected int counter = 0;
-    protected final int zestawienia = 3;
     protected int zestawienia_cut = 3;  // domyślnie 3 zestawień są wyświetlane, ale w razie braku opcji dla produktów, zestawienie jest ucinane
 
     public void doGet(HttpServletRequest request,
